@@ -44,30 +44,30 @@ public class Ex2 {
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
+        MyFrame mainFrame = new MyFrame(json_file);
+        mainFrame.setTitle("Graph");
+        mainFrame.setVisible(true);
+//        alg.load(json_file);
+    }
+
+    public static void main(String[] args){
+//        DirectedWeightedGraph g = new DWGraph();
+//        DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
+//        g_algo.init(g);
+//        g_algo.load("data/G1.json");
+//
+//        System.out.println(g_algo);
         MyFrame mainFrame = new MyFrame();
         mainFrame.setTitle("Graph");
         mainFrame.setVisible(true);
+//        g_algo.save("fd.json");
+
     }
 
-//    public static void main(String[] args){
-////        DirectedWeightedGraph g = new DWGraph();
-////        DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
-////        g_algo.init(g);
-////        g_algo.load("data/G1.json");
-////
-////        System.out.println(g_algo);
-//        MyFrame mainFrame = new MyFrame();
-//        mainFrame.setTitle("Graph");
-//        mainFrame.setVisible(true);
-////        g_algo.save("fd.json");
+//    public static void main(String[] args) {
+//        String file= args[0];
+//
+//        runGUI(file);
 //
 //    }
-
-    public static void main(String[] args) {
-          args[0]= "Ex2.jar";
-        String file= args[1];
-
-        runGUI(file);
-
-    }
 }
