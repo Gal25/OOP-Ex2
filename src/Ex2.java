@@ -64,6 +64,7 @@ public class Ex2 {
 //    }
 
     public static void main(String[] args) {
+          args[0]= "Ex2.jar";
         String file= args[1];
 
         runGUI(file);
