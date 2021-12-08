@@ -16,12 +16,6 @@ class DWGraph_AlgoTest {
 
 
     public DWGraph_AlgoTest() {
-
-    private static DirectedWeightedGraph g = new DWGraph();
-    private static DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
-
-
-    public DWGraph_AlgoTest() {
         for (int i = 0; i < 5; i++) {
             GeoLocation p = new GeoLocation_(i, i+1, i+2);
             NodeData n = new NodeData_(i, i, p);
