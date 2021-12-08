@@ -20,15 +20,29 @@ public class MyFrame extends JFrame implements ActionListener {
     private MenuItem shortestPathDist;
     private MenuItem shortestPath;
     private MenuItem tsp;
-    private MenuItem Graph1;
-    private MenuItem Graph2;
-    private MenuItem Graph3;
+    private MenuItem LoadGraph;
+    private MenuItem SaveGraph;
+//    private MenuItem Graph3;
+    private MenuItem remove_node;
+    private MenuItem remove_edge;
+    private MenuItem add_node;
+
 
 
     private static DirectedWeightedGraph g = new DWGraph();
     MyPanel myPanel= new MyPanel();
 
+    public MyFrame(String json_file){
+        initFrame();
+        addMenu();
+        initPanel();
+        DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
+        gg.load(json_file);
+        g = gg.getGraph();
+        myPanel.setGraph(g);
+        repaint();
 
+    }
 
     public MyFrame(){
         initFrame();
@@ -48,19 +62,32 @@ public class MyFrame extends JFrame implements ActionListener {
     private void addMenu(){
         MenuBar menuBar = new MenuBar();
         Menu select = new Menu("Select file");
-        Menu menu = new Menu("Functions");
+        Menu menu = new Menu("Functions of the algorithms");
+        Menu graph = new Menu("Functions on the graph");
+
+
         menuBar.add(menu);
         menuBar.add(select);
+        menuBar.add(graph);
         this.setMenuBar(menuBar);
 
-        Graph1 = new MenuItem("Graph1");
-        Graph1.addActionListener(this);
 
-        Graph2 = new MenuItem("Graph2");
-        Graph2.addActionListener(this);
+        remove_node = new MenuItem("remove node");
+        remove_node.addActionListener(this);
+        remove_edge = new MenuItem("remove edge");
+        remove_edge.addActionListener(this);
+        add_node = new MenuItem("add node");
+        add_node.addActionListener(this);
 
-        Graph3 = new MenuItem("Graph3");
-        Graph3.addActionListener(this);
+
+        LoadGraph = new MenuItem("Load Graph");
+        LoadGraph.addActionListener(this);
+
+        SaveGraph = new MenuItem("Save Graph");
+        SaveGraph.addActionListener(this);
+
+//        Graph3 = new MenuItem("Graph3");
+//        Graph3.addActionListener(this);
 
         isConnected = new MenuItem("isConnected");
         isConnected.addActionListener(this);
@@ -77,14 +104,19 @@ public class MyFrame extends JFrame implements ActionListener {
         tsp = new MenuItem("tsp");
         tsp.addActionListener(this);
 
+        select.add(LoadGraph);
+        select.add(SaveGraph);
+        graph.add(remove_edge);
+        graph.add(remove_node);
+        graph.add(add_node);
         menu.add(isConnected);
         menu.add(Center);
         menu.add(shortestPathDist);
         menu.add(shortestPath);
         menu.add(tsp);
-        select.add(Graph1);
-        select.add(Graph2);
-        select.add(Graph3);
+
+//        select.add(Graph3);
+
 
 
 
@@ -92,7 +124,7 @@ public class MyFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == Graph1 ){
+        if(e.getSource() == LoadGraph ){
             DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
             JFrame parentFrame = new JFrame();
             JFileChooser fileChooser = new JFileChooser();
@@ -111,7 +143,7 @@ public class MyFrame extends JFrame implements ActionListener {
             }
         }
 
-        if(e.getSource() == Graph2 ){
+        if(e.getSource() == SaveGraph ){
             DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
             JFrame parentFrame = new JFrame();
             JFileChooser fileChooser = new JFileChooser();
@@ -119,33 +151,33 @@ public class MyFrame extends JFrame implements ActionListener {
             int userSelection = fileChooser.showOpenDialog(parentFrame);
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToLoad = fileChooser.getSelectedFile();
-                String file= fileToLoad.getAbsolutePath();
-                gg.load(file);
+                File fileToSave = fileChooser.getSelectedFile();
+                String file= fileToSave.getAbsolutePath();
+                gg.save(file);
                 g = gg.getGraph();
                 myPanel.setGraph(g);
                 repaint();
-                System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
+                System.out.println("Load from file: " + fileToSave.getAbsolutePath());
             }
         }
 
-        if(e.getSource() == Graph3 ){
-            DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
-            JFrame parentFrame = new JFrame();
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Specify a file to load");
-            int userSelection = fileChooser.showOpenDialog(parentFrame);
+//        if(e.getSource() == Graph3 ){
+//            DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
+//            JFrame parentFrame = new JFrame();
+//            JFileChooser fileChooser = new JFileChooser();
+//            fileChooser.setDialogTitle("Specify a file to load");
+//            int userSelection = fileChooser.showOpenDialog(parentFrame);
+//
+//            if (userSelection == JFileChooser.APPROVE_OPTION) {
+//                File fileToLoad = fileChooser.getSelectedFile();
+//                String file= fileToLoad.getAbsolutePath();
+//                gg.load(file);
+//                g = gg.getGraph();
+//                myPanel.setGraph(g);
+//                repaint();
+//                System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
+//            }
 
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToLoad = fileChooser.getSelectedFile();
-                String file= fileToLoad.getAbsolutePath();
-                gg.load(file);
-                g = gg.getGraph();
-                myPanel.setGraph(g);
-                repaint();
-                System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
-            }
-        }
 
 
         if (e.getSource() == isConnected){
@@ -162,6 +194,10 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == tsp){
             myPanel.tsp();
+        }
+
+        if(e.getSource() == add_node){
+
         }
 
 
