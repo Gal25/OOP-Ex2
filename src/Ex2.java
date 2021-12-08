@@ -69,3 +69,4 @@ public class Ex2 {
         runGUI(file);
 
     }
+}
