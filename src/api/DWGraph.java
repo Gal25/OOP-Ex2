@@ -21,36 +21,33 @@ public class DWGraph implements DirectedWeightedGraph{
         this.mc = 0;
     }
 
-    //deep copy constructor
+   //deep copy constructor
     public DWGraph(DirectedWeightedGraph g){
         this.edges = new HashMap<>();
         this.nodes = new HashMap<>();
-        nodesDeepCopy(g, this.nodes);
-        edgesDeepCopy(g, this.edges);
+        nodesCopy(g, this.nodes);
+        edgesCopy(g, this.edges);
         this.sizeNode = g.nodeSize();
         this.sizeEdges = g.edgeSize();
     }
 
-    private HashMap<Integer, HashMap<Integer, EdgeData>> edgesDeepCopy(DirectedWeightedGraph g, HashMap edges) {
+    private HashMap<Integer, HashMap<Integer, EdgeData>> edgesCopy(DirectedWeightedGraph g, HashMap edges) {
         HashMap<Integer, HashMap<Integer, EdgeData>> h = edges;
-        int key;
-        for (Iterator<NodeData> it = g.nodeIter(); it.hasNext(); ) {
-            NodeData n = it.next();
-            key = n.getKey();
-            for (Iterator<EdgeData> iter = g.edgeIter(key); iter.hasNext(); ) {
-                EdgeData e = iter.next();
-                this.edges.get(e.getSrc()).put(e.getDest(), e);
-            }
+        Iterator<EdgeData> it = g.edgeIter();
+        while ( it.hasNext()) {
+            EdgeData E = it.next();
+            this.edges.get(E.getSrc()).put(E.getDest(), E);
         }
         return h;
     }
 
 
-    private HashMap<Integer, NodeData> nodesDeepCopy(DirectedWeightedGraph g, HashMap nodes) {
+    private HashMap<Integer, NodeData> nodesCopy(DirectedWeightedGraph g, HashMap nodes) {
         HashMap<Integer, NodeData> h = nodes;
-        for (Iterator<NodeData> it = g.nodeIter(); it.hasNext(); ) {
-            NodeData n = it.next();
-            this.addNode(n);
+        Iterator<NodeData> it = g.nodeIter();
+        while (it.hasNext()) {
+            NodeData N = it.next();
+            this.addNode(N);
         }
         return h;
     }
