@@ -18,6 +18,12 @@ class DWGraph_AlgoTest {
 
 
     public DWGraph_AlgoTest() {
+
+    private static DirectedWeightedGraph g = new DWGraph();
+    private static DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
+
+
+    public DWGraph_AlgoTest() {
         for (int i = 0; i < 5; i++) {
             GeoLocation p = new GeoLocation_(i, i+1, i+2);
             NodeData n = new NodeData_(i, i, p);
@@ -129,7 +135,7 @@ class DWGraph_AlgoTest {
         list1.add(n2);
         list1.add(n4);
         list1.add(n5);
-        System.out.println(list1);
+
         assertEquals(g_algo.shortestPath(0, 4), list1);
     }
 
@@ -156,15 +162,12 @@ class DWGraph_AlgoTest {
         g_algo.getGraph().connect(3,0,3);
         g_algo.getGraph().connect(0,2,2);
         g_algo.getGraph().connect(1,3,4);
-//        g_algo.getGraph().connect(2,3,1);
         g_algo.getGraph().connect(2,3,5);
         g_algo.getGraph().connect(4,1,3);
         g_algo.getGraph().connect(3,4,2);
-        System.out.println(g_algo);
         g_algo.center();
-        System.out.println(g_algo.center());
+
         NodeData N = g_algo.getGraph().getNode(3);
-        System.out.println(g_algo);
         assertEquals(N, g_algo.center());
 
     }
@@ -186,13 +189,12 @@ class DWGraph_AlgoTest {
         d.connect(2,0,6);
         DirectedWeightedGraphAlgorithms g = new DWGraph_Algo();
         g.init(d);
-        System.out.println(g);
+
         List<NodeData> l = new LinkedList<>();
         l.add(n1);
         l.add(n2);
         l.add(n3);
         List<NodeData> list = g.tsp(l);
-        System.out.println(list);
         assertEquals(list.get(0),n1);
         assertEquals(list.get(1),n2);
         assertEquals(list.get(2),n3);
@@ -201,7 +203,7 @@ class DWGraph_AlgoTest {
 
     @Test
     void save() {
-        g_algo.save("G1.json");
+        g_algo.save("data/G1.json");
 //        DirectedWeightedGraphAlgorithms ga3 = new_ga DWGraph_Algo();
 
         DirectedWeightedGraphAlgorithms new_ga = new DWGraph_Algo();
