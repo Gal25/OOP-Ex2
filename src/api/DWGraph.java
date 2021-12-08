@@ -200,7 +200,7 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         edgesValue += "}";
 
-        return "DWGraph_DS{" +
+        return "DWGraph{" +
                 "nodes=" + nodesValue +
                 ", edges=" + edgesValue +
                 '}';
