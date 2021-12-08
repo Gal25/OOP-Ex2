@@ -78,6 +78,14 @@ class MyPanel extends JPanel implements MouseInputListener {
 
     }
 
+    public static void remove_node(){
+        JFrame input = new JFrame();
+        String src = JOptionPane.showInputDialog(
+                null, "what is the key of the node that you want to remove?");
+
+
+    }
+
     public static void isConnected() {
         JFrame input = new JFrame();
         DirectedWeightedGraphAlgorithms gr = new DWGraph_Algo();
@@ -277,23 +285,26 @@ class MyPanel extends JPanel implements MouseInputListener {
             h2.drawString("" + key, x, y);
 
         }
-        Iterator<EdgeData> Edge = g.edgeIter();
-        while (Edge.hasNext()) {
-            EdgeData edge_data = Edge.next();
-
-            GeoLocation s = g.getNode(edge_data.getSrc()).getLocation();
-            GeoLocation d = g.getNode(edge_data.getDest()).getLocation();
-            h2.setColor(Color.BLACK);
-            h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
-            if (edge_data.getTag() == 100) {
-                h2.setColor(Color.RED);
-                h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
-                edge_data.setTag(0);
-            } else {
-                h2.setColor(Color.BLUE);
-                h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
-
-            }
+//        Iterator<EdgeData> Edge = g.edgeIter();
+//        while (Edge.hasNext()) {
+//            EdgeData edge_data = Edge.next();
+//
+//            GeoLocation s = g.getNode(edge_data.getSrc()).getLocation();
+//            GeoLocation d = g.getNode(edge_data.getDest()).getLocation();
+//            h2.setColor(Color.BLACK);
+//            h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
+//            if (edge_data.getTag() == 100) {
+//                h2.setColor(Color.RED);
+//                h2.fillOval(getX.get(edge_data.getDest()).intValue(), getY.get(edge_data.getDest()).intValue(), r*2, r*2);
+//                edge_data.setTag(0);
+//            } else {
+//                h2.setColor(Color.BLUE);
+//                h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
+//                h2.setColor(Color.GREEN);
+//                h2.fillOval(getX.get(edge_data.getDest()).intValue(), getY.get(edge_data.getDest()).intValue(),5, 5);
+//
+//
+//            }
 //                NodeData dest = g.getNode(edge_data.getDest());
 //                GeoLocation p2 = dest.getLocation();
 //                if (prev != null) {
@@ -319,7 +330,7 @@ class MyPanel extends JPanel implements MouseInputListener {
 //                prev = p;
 //            }
 //        }
-        }
+//        }
 
         Iterator<EdgeData> eIter = g.edgeIter();
         while (eIter.hasNext()) {
@@ -327,12 +338,17 @@ class MyPanel extends JPanel implements MouseInputListener {
             int x1 = getX.get(e.getSrc()).intValue(), y1 = getY.get(e.getSrc()).intValue();
             int x2 = getX.get(e.getDest()).intValue(), y2 = getY.get(e.getDest()).intValue();
             if (e.getTag() == 100) {
+                h2.setColor(Color.RED);
+                h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(), r*2, r*2);
                 e.setTag(0);
-                h2.setColor(Color.black);
+
             } else {
                 h2.setColor(Color.BLUE);
+                h2.drawLine(x1 + r, y1 + r, x2 + r, y2 + r);
             }
-            h2.drawLine(x1 + r, y1 + r, x2 + r, y2 + r);
+
+            h2.setColor(Color.GREEN);
+            h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(),5, 5);
         }
     }
 
@@ -343,4 +359,3 @@ class MyPanel extends JPanel implements MouseInputListener {
     }
 
 }
-
