@@ -40,7 +40,7 @@ In the class can find the implementation of:
 •	Distance – A variable that get the distance between two nodes.
 
 
-## __EdgeData_ Class:__
+## __ EdgeData_ Class:__
 This class implements the interface EdgeData.\
 This simple class representing an edge in a directed weighted graph.\
 In the class can find the main variables and their implementation:
@@ -79,7 +79,7 @@ This class representing  a directional weight graph. Implementation of the graph
 __More private functions:__
 
 **_edgesCopy(DirectedWeightedGraph g, HashMap edges):_** Method that get a new data structure and duplicate this HashMap of edges.\
-**_nodesCopy(DirectedWeightedGraph g, HashMap nodes):_** Method that get a new data structure and duplicate this HashMap of nodes.\
+**_nodesCopy(DirectedWeightedGraph g, HashMap nodes):_** Method that get a new data structure and duplicate this HashMap of nodes.
 
 
 
