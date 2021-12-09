@@ -9,7 +9,7 @@ https://github.com/Gal25
 ```
 
 This project is an assignment in an Object Oriented Programming course at Ariel University.\
-In the project we were asked to design and implement data structures and algorithms of graphs (directed and weighted).\ 
+In the project we were asked to design and implement data structures and algorithms of graphs (directed and weighted). 
 The project consists of two parts, first the implementation of a weighted and directed graph and the algorithms operate on the graph. The second part is design the graph and use the algorithms we implemented in the first part and make the graph visual by using JAVA SWING and bringing JFrame and JPanel libraries.\
 The project include five different interfaces and seven classes. The interfaces are under the API of the graph which include in the content of all the functions for the implementation of the graph. The  five classes the implementation of the interfaces themselves, moreover there is an implementation of tests for each function in the graph (show under the package ‘tests’). Two additional classes involve the implementation of the GUI.
 
@@ -97,8 +97,8 @@ The implementation according to the data structures of Hash map (the value of th
 | getGraph() | underlying graph of which specific class works| O(1) |
 | copy() | Computes a deep copy of this weighted graph | O(1) |
 | isConnected() | true if there is a valid path from each node to each other node |  | 
-| shortestPathDist(int src, int dest) | representing the shortest distance between first node(source) and second node (destination),\ us the Dijkstra algorithm (return double of the distance) |  |
-| shortestPath(int src, int dest) | representing the shortest distance between first node(source) and second node (destination),\ us the Dijkstra algorithm (return list of the nodes)|  |
+| shortestPathDist(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return double of the distance) |  |
+| shortestPath(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return list of the nodes)|  |
 | center() | finds the NodeData which minimizes the max distance to all the other nodes |  |
 | tsp(List<NodeData>) | computes a list of consecutive nodes which go over all the nodes in cities |  |
 | save(String file) | saves the json file that is a directed weighted graph to the given |  |
