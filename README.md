@@ -158,7 +158,8 @@ For the demo we will select the _center()_ function to see the running time:
   * shortestPath\
   * center\
   * TSP
-  ``````
+  ```
+  ```
   **_Functions on the graph_**:\
   * Remove node
   ```
