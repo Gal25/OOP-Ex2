@@ -16,7 +16,7 @@ The project include five different interfaces and seven classes. The interfaces 
 
 
 ## API PACKAGE:
-### __NodeData_ Class:__
+### __NodeData_Class:__
 This class implements the interface NodeData.\
 This simple class representing a node (vertex) on a directed weighted graph.\
 In the class can find the main variables and their implementation:
@@ -28,7 +28,7 @@ In the class can find the main variables and their implementation:
 •	Tag- A variable that used by default: (-1) if the node is not visited (helps in calculating functions in the DWGraph_Algo).
 
 
-## __GeoLocation_ Class:__
+## __GeoLocation_Class:__
 This class implements the interface GeaoLocation.\
 This simple class representing a the location of node (vertex) on a directed weighted graph.\
 Can find that the location determined by values of X, Y, Z.\
@@ -40,7 +40,7 @@ In the class can find the implementation of:
 •	Distance – A variable that get the distance between two nodes.
 
 
-## __ EdgeData_ Class:__
+## __EdgeData_Class:__
 This class implements the interface EdgeData.\
 This simple class representing an edge in a directed weighted graph.\
 In the class can find the main variables and their implementation:
