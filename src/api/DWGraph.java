@@ -12,7 +12,9 @@ public class DWGraph implements DirectedWeightedGraph{
     public int sizeEdges;
     public int mc;
 
-    //defult constructor
+    /**
+     * Default constructor
+     */
     public DWGraph(){
         this.edges = new HashMap<>();
         this.nodes = new HashMap<>();
@@ -21,8 +23,10 @@ public class DWGraph implements DirectedWeightedGraph{
         this.mc = 0;
     }
 
-    //deep copy constructor
-    public DWGraph(DirectedWeightedGraph g){
+    /**
+     * Deep copy constructor
+     * @param g
+     */    public DWGraph(DirectedWeightedGraph g){
         this.edges = new HashMap<>();
         this.nodes = new HashMap<>();
         nodesCopy(g, this.nodes);
@@ -30,7 +34,12 @@ public class DWGraph implements DirectedWeightedGraph{
         this.sizeNode = g.nodeSize();
         this.sizeEdges = g.edgeSize();
     }
-
+    /**
+     * A copy constructor fo the edges in th graph.
+     * @param  g DirectedWeightedGraph
+     * @param edges hashmap of edges
+     * @return new data structure of HashMap that have copied all the edges in the graph.
+     */
     private HashMap<Integer, HashMap<Integer, EdgeData>> edgesCopy(DirectedWeightedGraph g, HashMap edges) {
         HashMap<Integer, HashMap<Integer, EdgeData>> h = edges;
         Iterator<EdgeData> it = g.edgeIter();
@@ -41,7 +50,12 @@ public class DWGraph implements DirectedWeightedGraph{
         return h;
     }
 
-
+    /**
+     * A copy constructor fo the nodes in th graph.
+     * @param  g DirectedWeightedGraph
+     * @param nodes hashmap of nodes
+     * @return new data structure of HashMap that have copied all the nodes in the graph.
+     */
     private HashMap<Integer, NodeData> nodesCopy(DirectedWeightedGraph g, HashMap nodes) {
         HashMap<Integer, NodeData> h = nodes;
         Iterator<NodeData> it = g.nodeIter();
@@ -52,11 +66,23 @@ public class DWGraph implements DirectedWeightedGraph{
         return h;
     }
 
+    /**
+     * returns the node_data by the node_id,
+     * @param key - the node_id
+     * @return the node_data by the node_id, null if none.
+     */
     @Override
     public NodeData getNode(int key) {
         return this.nodes.get(key);
     }
 
+    /**
+     * returns the data of the edge (src,dest), null if none.
+     * Note: this method should run in O(1) time.
+     * @param src
+     * @param dest
+     * @return
+     */
     @Override
     public EdgeData getEdge(int src, int dest) {
         if (this.nodes.containsKey(dest) && this.nodes.containsKey(src)){
@@ -64,7 +90,11 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         return null;
     }
-
+    /**
+     * adds a new node to the graph with the given node_data.
+     * Note: this method should run in O(1) time.
+     * @param n
+     */
     @Override
     public void addNode(NodeData n) {
         if(nodes.containsKey(n.getKey())){
@@ -78,7 +108,13 @@ public class DWGraph implements DirectedWeightedGraph{
         }
 
     }
-
+    /**
+     * Connects an edge with weight w between node src to node dest.
+     * * Note: this method should run in O(1) time.
+     * @param src - the source of the edge.
+     * @param dest - the destination of the edge.
+     * @param w - positive weight representing the cost (aka time, price, etc) between src-->dest.
+     */
     @Override
     public void connect(int src, int dest, double w) {
         if (src != dest){
@@ -92,7 +128,12 @@ public class DWGraph implements DirectedWeightedGraph{
         }
 
     }
-
+    /**
+     * This method returns an Iterator for the
+     * collection representing all the nodes in the graph.
+     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<node_data>
+     */
     @Override
     public Iterator<NodeData> nodeIter() {
         int MC = this.mc;
@@ -102,7 +143,11 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         return N.iterator();
     }
-
+    /**
+     * This method returns an Iterator for all the edges in this graph.
+     * Note: if any of the edges going out of this node were changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<EdgeData>
+     */
 
     @Override
     public Iterator<EdgeData> edgeIter() {
@@ -119,7 +164,11 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         return E.iterator();
     }
-
+    /**
+     * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
+     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<EdgeData>
+     */
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) {
         int MC = this.mc;
@@ -128,13 +177,17 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         return this.edges.get(node_id).values().iterator();
     }
-
+    /**
+     * Deletes the node (with the given ID) from the graph -
+     * and removes all edges which starts or ends at this node.
+     * This method should run in O(k), V.degree=k, as all the edges should be removed.
+     * @return the data of the removed node (null if none).
+     * @param key
+     */
     @Override
     public NodeData removeNode(int key) {
         if(this.nodes.containsKey(key)){
-//            HashMap<Integer, EdgeData> h = this.edges.remove(key);
-//            this.sizeEdges = this.sizeEdges - h.size();
-//            this.mc = this.mc + h.size();
+
             Collection<Integer> E = edges.keySet();
             for (int i : E){
                 if(edges.get(i).containsKey(key)){
@@ -153,7 +206,13 @@ public class DWGraph implements DirectedWeightedGraph{
 
         return null;
     }
-
+    /**
+     * Deletes the edge from the graph,
+     * Note: this method should run in O(1) time.
+     * @param src
+     * @param dest
+     * @return the data of the removed edge (null if none).
+     */
     @Override
     public EdgeData removeEdge(int src, int dest) {
         EdgeData E = edges.get(src).remove(dest);
@@ -164,22 +223,36 @@ public class DWGraph implements DirectedWeightedGraph{
         }
         return E;
     }
-
+    /** Returns the number of vertices (nodes) in the graph.
+     * Note: this method should run in O(1) time.
+     * @return
+     */
     @Override
     public int nodeSize() {
         return this.sizeNode;
     }
-
+    /**
+     * Returns the number of edges (assume directional graph).
+     * Note: this method should run in O(1) time.
+     * @return
+     */
     @Override
     public int edgeSize() {
         return this.sizeEdges;
     }
-
+    /**
+     * Returns the Mode Count - for testing changes in the graph.
+     * @return
+     */
     @Override
     public int getMC() {
         return this.mc;
     }
 
+    /**
+     * Returns the string of the graph
+     * @return
+     */
     public String toString() {
         String nodesValue = "{";
         for (NodeData n : nodes.values()) {
