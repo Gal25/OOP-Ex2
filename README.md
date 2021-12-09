@@ -78,8 +78,8 @@ This class representing  a directional weight graph. Implementation of the graph
 
 __More private functions:__
 
-_edgesCopy(DirectedWeightedGraph g, HashMap edges):_ Method that get a new data structure and duplicate this HashMap of edges.\
-_nodesCopy(DirectedWeightedGraph g, HashMap nodes):_ Method that get a new data structure and duplicate this HashMap of nodes.\
+**_edgesCopy(DirectedWeightedGraph g, HashMap edges):_** Method that get a new data structure and duplicate this HashMap of edges.\
+**_nodesCopy(DirectedWeightedGraph g, HashMap nodes):_** Method that get a new data structure and duplicate this HashMap of nodes.\
 
 
 
@@ -107,20 +107,20 @@ The implementation according to the data structures of Hash map (the value of th
   
 __More private functions:__
   
-•	_algorithm_of_Dijkstra:_ The function receive a NodeData. The function based on the Dijkstra's algorithm.
+•	**_algorithm_of_Dijkstra:_** The function receive a NodeData. The function based on the Dijkstra's algorithm.
     Solves the problem of finding the easiest route from point in graph to destination in weighted graph. It is possible to find using       this algorithm, at this time, the fast paths to all the points in the graph. The algorithm calculates the weights of the nodes with     the desired edges each time and compares them. According to the algorithm we get the path with the lowest weight.\
     Link: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm \
     _Complexity: (O(V+E)), |V|=number of nodes, |E|=number of edges._\
 Returns an array of doubles that representing the shortest path to each node (the indexs on the array representing the nodes ID).\
-•	_toString():_ The function receive a graph and by the library in java represent the graph as a string.\
-•	_reset_weight():_ This function re – update the weight of the all nodes in the graph.\
-• _findTheLongestPathInDijkstra(NodeDate):_ This function receive a NodeData (vertex). Its realization is carried out according to the      result obtained from the Dijksrta algorithm, depending on the result we will go over the array and choose the longest path from all      the short ones and return the destination (node) that occurred with the longest path. This function helps to find the center of the      graph.\
-•	_upSideDownGraph():_ This function creates a new graph that will be the graph in the opposite direction of the existing graph.\
-• _BFS(DirectedWeightedGraph, NodeData):_ This function checks if there is a path that passes through all the vertices.\
-• _BFS_isConnected(DirectedWeightedGraph graph, NodeData N):_ This function checks whether the graph is connected ,uses the BFS           algorithm.\
+•	**_toString():_** The function receive a graph and by the library in java represent the graph as a string.\
+•	**_reset_weight():_** This function re – update the weight of the all nodes in the graph.\
+• **_findTheLongestPathInDijkstra(NodeDate):_** This function receive a NodeData (vertex). Its realization is carried out according to the      result obtained from the Dijksrta algorithm, depending on the result we will go over the array and choose the longest path from all      the short ones and return the destination (node) that occurred with the longest path. This function helps to find the center of the      graph.\
+•	**_upSideDownGraph():_** This function creates a new graph that will be the graph in the opposite direction of the existing graph.\
+• **_BFS(DirectedWeightedGraph, NodeData):_** This function checks if there is a path that passes through all the vertices.\
+• **_BFS_isConnected(DirectedWeightedGraph graph, NodeData N):_** This function checks whether the graph is connected ,uses the BFS           algorithm.\
 __Link to the algorithm BSF: https://en.wikipedia.org/wiki/Breadth-first_search.__ \
-• _changeTags():_ This function re-update all the tags of the nodes in the graph to be -1 (NOT VISITED).\
-• _graphJsonDeserializer implements JsonDeserializer<DWGraph>:_ This class implements the Json Deserializer to allow you to load the        Jason file. 
+• **_changeTags():_** This function re-update all the tags of the nodes in the graph to be -1 (NOT VISITED).\
+• **_graphJsonDeserializer implements JsonDeserializer<DWGraph>:_** This class implements the Json Deserializer to allow you to load the        Jason file. 
 
   
   
