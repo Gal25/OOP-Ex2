@@ -89,11 +89,10 @@ public class DWGraph_Algo implements DirectedWeightedGraphAlgorithms{
 
             if (src == dest)
                 return 0;
-//            reset_weight();
+
             changeTags();
             double[] ans = algorithm_of_Dijkstra(graph.getNode(src));
-//            reset_weight();
-//            changeALLTag();
+
             int len = ans.length;
             if(dest <= len){
                 return ans[dest];
@@ -341,7 +340,10 @@ public class DWGraph_Algo implements DirectedWeightedGraphAlgorithms{
     }
 
 
-
+    /**
+     * This function representing the graph as a string
+     * @return string
+     */
     public String toString() {
        return this.graph.toString();
     }
@@ -351,7 +353,14 @@ public class DWGraph_Algo implements DirectedWeightedGraphAlgorithms{
             graph.getNode(i).setWeight(Integer.MAX_VALUE);
         }
     }
-
+    /**
+     * This function gets a node. Its realization is carried out according to the result obtained
+     * from the Dijkstra algorithm, depending on the result we will go over the array and choose the
+     * longest route from all the short ones and return the same node. This function helps to find the
+     * center of the graph.
+     * @param src - source node
+     * @return - the node with the longest path from the src node.
+     */
     private double findTheLongestPathInDijkstra(NodeData src){
         double[] dis =  algorithm_of_Dijkstra(src); //we get the graph with the all shortest paths to all nodes on the graph
         double curr = dis[0];
@@ -383,7 +392,7 @@ public class DWGraph_Algo implements DirectedWeightedGraphAlgorithms{
             Iterator<EdgeData> edges = graph.edgeIter(No.getKey());
             while (edges.hasNext()){
                 EdgeData E = edges.next();
-                new_graph.connect(E.getDest(),E.getSrc(),E.getWeight()); // connect between the edges but in the opposite direction
+                new_graph.connect(E.getDest(),No.getKey(),E.getWeight()); // connect between the edges but in the opposite direction
             }
 
         }
@@ -479,4 +488,3 @@ public class DWGraph_Algo implements DirectedWeightedGraphAlgorithms{
 
 
 }
-
