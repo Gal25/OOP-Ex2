@@ -89,20 +89,20 @@ The class represent an implementation of a Directed (positive) Weighted Graph Th
 The implementation according to the data structures of Hash map (the value of the Hash map is based on the same data structure).
 
 
-| __Main Method__ | __Description__ | __Complexity__|
-| :---------------- | :---------------- | :--------------: |
-| DWGraph_Algo() | Default constructor | O(1) |
-| DWGraph_Algo(DirectedWeightedGraph| Constructor | O(1) |
-| init(DirectedWeightedGraph g) | init the graph on which this set of algorithms operates on | O(1) |
-| getGraph() | underlying graph of which specific class works| O(1) |
-| copy() | Computes a deep copy of this weighted graph | O(1) |
-| isConnected() | true if there is a valid path from each node to each other node |  | 
-| shortestPathDist(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return double of the distance) |  |
-| shortestPath(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return list of the nodes)|  |
-| center() | finds the NodeData which minimizes the max distance to all the other nodes |  |
-| tsp(List<NodeData>) | computes a list of consecutive nodes which go over all the nodes in cities |  |
-| save(String file) | saves the json file that is a directed weighted graph to the given |  |
-| load(String file) | this function implement the load of a graph to this graph algorithm |  |
+| __Main Method__ | __Description__ |
+| :---------------- | :---------------- |
+| DWGraph_Algo() | Default constructor |
+| DWGraph_Algo(DirectedWeightedGraph| Constructor |
+| init(DirectedWeightedGraph g) | init the graph on which this set of algorithms operates on |
+| getGraph() | underlying graph of which specific class works|
+| copy() | Computes a deep copy of this weighted graph |
+| isConnected() | true if there is a valid path from each node to each other node |
+| shortestPathDist(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return double of the distance) |
+| shortestPath(int src, int dest) | representing the shortest distance between first node(source) and second node (destination), us the Dijkstra algorithm (return list of the nodes)|
+| center() | finds the NodeData which minimizes the max distance to all the other nodes |
+| tsp(List<NodeData>) | computes a list of consecutive nodes which go over all the nodes in cities |
+| save(String file) | saves the json file that is a directed weighted graph to the given |
+| load(String file) | this function implement the load of a graph to this graph algorithm |
 
   
 __More private functions:__
