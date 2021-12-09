@@ -65,15 +65,15 @@ This class representing  a directional weight graph. Implementation of the graph
 | getEdge(int src, int dest) | data of the edge (src,dest) | O(1) |
 | addNode(NodeData) | adds a new node to the graph with the given node_data| O(1) |
 | connect(int src, int dest, double) | Connects an edge with weight w between node src to node dest | O(1)|
-| nodeIter() | returns an Iterator for the collection representing all the nodes in the graph |  |
-| edgeIter() | eturns an Iterator for all the edges in this graph |  |
-| edgeIter(int node_id) | returns an Iterator for edges getting out of the given node|  |
-| removeNode(int key) | Deletes the node (with the given ID) from the graph and removes all edges which starts or ends at this node|  |
+| nodeIter() | returns an Iterator for the collection representing all the nodes in the graph | O(1) |
+| edgeIter() | eturns an Iterator for all the edges in this graph | O(k) V.degree=k |
+| edgeIter(int node_id) | returns an Iterator for edges getting out of the given node| O(1) |
+| removeNode(int key) | Deletes the node (with the given ID) from the graph and removes all edges which starts or ends at this node| O(k), V.degree=k |
 | removeEdge(int src, int dest) | Deletes the edge from the graph | O(1) |
 | nodeSize() | number of vertices (nodes) in the graph | O(1) |
 | edgeSize() | number of edges (assume directional graph) | O(1) |
 | getMC() | Mode Count - for testing changes in the graph | O(1) |
-| toString() |  receive a graph as a string |  | 
+
 
 
 __More private functions:__
