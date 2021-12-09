@@ -1,25 +1,16 @@
-package GUI;
-
-import api.*;
-import org.w3c.dom.Node;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.*;
-import java.util.List;
-
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-
-class MyPanel extends JPanel implements MouseInputListener {
+{
 
     public int brushSize = 10;
     private int mouseX = -1;
     private int mouseY = -1;
     private boolean mousePressed = false;
+    private List<NodeData_> nodes;
+    private NodeData_ waitingNode;
+    String message;
     private static DirectedWeightedGraph g = new DWGraph();
+    private static DirectedWeightedGraph g_paint = new DWGraph();
     private static DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
+    private int counter = 0;
 
     public MyPanel() {
         super();
@@ -27,9 +18,9 @@ class MyPanel extends JPanel implements MouseInputListener {
         int width = screensize.width;
         int height = screensize.height;
         this.setBackground(Color.white);
+        this.setPreferredSize(new Dimension(width, height));
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        this.setPreferredSize(new Dimension(width, height));
 
     }
 
@@ -40,12 +31,44 @@ class MyPanel extends JPanel implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.repaint();
+        message = "";
+        int x = e.getX();
+        int y = e.getY();
+        GeoLocation_ p =new GeoLocation_(x,y,0);
+        while (g.getNode(this.counter) != null ) {
+            this.counter++;
+        }
+        NodeData_ N = new NodeData_(p, this.counter);
+        g.addNode(N);
+
+//            this.waitingNode = N;
+//             nodes.add(N);
+        repaint();
+        System.out.println("mouseClicked");
+        System.out.println(x + " " + y);
+
+
+    }
+
+    public void add_node(){
+        JFrame input = new JFrame();
+        StringBuilder s = new StringBuilder();
+        String node = JOptionPane.showInputDialog(
+                null, "enter the key of the node that you want to add");
+        String locationX = JOptionPane.showInputDialog(
+                null, "enter the x location of the node that you want to add: ");
+        String locationY = JOptionPane.showInputDialog(
+                null, "enter the y location of the node that you want to add: ");
+        String locationZ = JOptionPane.showInputDialog(
+                null, "enter the z location of the node that you want to add: ");
+        NodeData curr = new NodeData_(new GeoLocation_(Integer.parseInt(locationX),Integer.parseInt(locationY), Integer.parseInt(locationZ)), Integer.parseInt(node));
+        g.addNode(curr);
+        repaint();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println("mousePressed");
     }
 
     @Override
@@ -55,15 +78,17 @@ class MyPanel extends JPanel implements MouseInputListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
+        System.out.println("mouseEntered");
 
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
+        System.out.println("mouseExited");
 
     }
+
+
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -78,12 +103,42 @@ class MyPanel extends JPanel implements MouseInputListener {
 
     }
 
-    public static void remove_node(){
+    public void remove_Node() {
         JFrame input = new JFrame();
-        String src = JOptionPane.showInputDialog(
-                null, "what is the key of the node that you want to remove?");
+        StringBuilder s = new StringBuilder();
+        String node = JOptionPane.showInputDialog(
+                null, "which vertex you want to remove?");
+
+        NodeData curr = new NodeData_(Integer.parseInt(node));
+        if (g.getNode(curr.getKey()) == null) {
+            JOptionPane.showMessageDialog(input, "This graph does not contain the vertex: " + node);
+        } else {
+            g.removeNode(curr.getKey());
+            removeEdgeWithNode(curr);
+
+        }
+    }
 
 
+    private void removeEdgeWithNode(NodeData N) {
+        Iterator<EdgeData> it = g.edgeIter(N.getKey());
+        while(it.hasNext()){
+            EdgeData edge = it.next();
+            if(edge.getSrc() == N.getKey()){
+                g.removeEdge(edge.getSrc(), edge.getDest());
+            }
+        }
+    }
+
+
+    private void remove_Edge(EdgeData E){
+        Iterator<EdgeData> it = g.edgeIter();
+        while(it.hasNext()){
+            EdgeData edge= it.next();
+            if(edge.getSrc() == E.getSrc() && edge.getDest() == E.getDest()){
+                g.removeEdge(edge.getSrc(), edge.getDest());
+            }
+        }
     }
 
     public static void isConnected() {
@@ -157,72 +212,31 @@ class MyPanel extends JPanel implements MouseInputListener {
 
     public void tsp() {
         JFrame input = new JFrame();
-        DirectedWeightedGraphAlgorithms gr = new DWGraph_Algo();
-        gr.init(g);
-        List<NodeData> cities = new ArrayList<NodeData>();
-        String src = "";
-        StringBuilder s = new StringBuilder();
+        JOptionPane.showMessageDialog(input, "To get TSP enter all the nodes from start node to end node \n after you went to exit enter EXIT");
+        List<NodeData> TSP = new LinkedList<NodeData>();
+        String ans;
         do {
-            src = JOptionPane.showInputDialog(
-                    null, "get a key if you want to Exit get in Exit");
-
-        }
-        while (!src.equals("Exit"));
-        ArrayList<NodeData> shortPath = new ArrayList<NodeData>();
-        shortPath = (ArrayList<NodeData>) gr.tsp(cities);
-        if (shortPath != null) {
-            for (int i = 0; i + 1 < shortPath.size(); i++) {
-                g.getEdge(shortPath.get(i).getKey(), shortPath.get(i + 1).getKey()).setTag(100);
-                s.append(shortPath.get(i).getKey()).append("--> ");
+            ans = JOptionPane.showInputDialog(input, "Enter node or EXIT when it is the last node");
+            if(ans.equalsIgnoreCase("exit")) {
+                break;
             }
-            s.append(shortPath.get(shortPath.size() - 1).getKey());
-            repaint();
-            JOptionPane.showMessageDialog(input, "the shortest path is: " + s);
+            try {
+                TSP.add(g.getNode(Integer.parseInt(ans)));
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        } while (!ans.equalsIgnoreCase("exit"));
+        DWGraph_Algo ga = new DWGraph_Algo();
+        ga.init(g);
+        List<NodeData> temp = ga.tsp(TSP);
+        for (int j = 0;j < temp.size()-1; j++) {
+            g.getEdge(temp.get(j).getKey(), temp.get(j+1).getKey()).setTag(100);
         }
-        if (shortPath == null) {
-            JOptionPane.showMessageDialog(input, "the shortest path is: null ");
-        }
+        repaint();
+
     }
 
-//    public static void load(){
-//
-//    }
-
-
-    /**
-     * This function maintains the proportions between different page sizes.
-     *
-     * @param arr
-     * @return
-     */
-    public void normal(double[] arr, double scale) {
-        double min = Double.MAX_VALUE;
-        double max = Double.MIN_VALUE;
-//        double[] out = new double[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            double v = arr[i];
-            if (v < min) {
-                min = v;
-            }
-            if (v > max) {
-                max = v;
-            }
-        }
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = scale * ((arr[i] - min) / (max - min));
-        }
-        // return out;
-    }
-
-//    private double[] getX(NodeData[] arr){
-//        double x = 0;
-//        double[] ans = new double[g.nodeSize()];
-//        Iterator<NodeData> it = g.nodeIter();
-//        while(it.hasNext()){
-//            NodeData node = it.next();
-//            node.getLocation().x();
-//
-//        }
 
     private void mapRange(HashMap<Integer, Double> input, double input_start, double input_end, double output_start, double output_end) {
         final double slope = ((output_end - output_start) / (input_end - input_start));
@@ -233,8 +247,7 @@ class MyPanel extends JPanel implements MouseInputListener {
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
 //        double[] out = new double[arr.length];
-        for (Integer key : input.keySet()) {
-            double v = input.get(key);
+        for (double v : input.values()) {
             if (v < min) {
                 min = v;
             }
@@ -244,10 +257,12 @@ class MyPanel extends JPanel implements MouseInputListener {
         }
 
         mapRange(input, min, max, output_start, output_end);
+        //return new double[] {min, max};
     }
 
     @Override
     protected void paintComponent(Graphics h) {
+        System.out.println("Repainted");
         HashMap<Integer, Double> getX = new HashMap<>(g.nodeSize());
         HashMap<Integer, Double> getY = new HashMap<>(g.nodeSize());
         Graphics2D h2 = (Graphics2D) h;
@@ -255,83 +270,39 @@ class MyPanel extends JPanel implements MouseInputListener {
         h2.setStroke(new BasicStroke(2));
         super.paintComponent(h2);
         int r = 7;
-        GeoLocation prev = null;
-        Iterator<NodeData> Nodes = g.nodeIter();
+
+        Iterator<NodeData> Nodes = this.g.nodeIter();
         while (Nodes.hasNext()) {
             NodeData node_data = Nodes.next();
             GeoLocation p = node_data.getLocation();
-            System.out.println(p.x());
             getX.put(node_data.getKey(), p.x());
             getY.put(node_data.getKey(), p.y());
         }
         int marginX = 50;
         int marginY = 50;
+//        System.out.println(this.getWidth() + " ---- " + this.getHeight());
+//        System.out.println(getX);
+//        double[] rangeX = mapRange(getX, marginX, this.getWidth() - marginX);
+//        double[] rangeY = mapRange(getY, marginY, this.getHeight() - marginY);
         mapRange(getX, marginX, this.getWidth() - marginX);
         mapRange(getY, marginY, this.getHeight() - marginY);
+
         Iterator<NodeData> it = g.nodeIter();
         while (it.hasNext()) {
             NodeData node_data = it.next();
             int key = node_data.getKey();
             GeoLocation p = node_data.getLocation();
 
-            double[] posP = leftTop(r, p);
             final int x = getX.get(key).intValue();
             final int y = getY.get(key).intValue();
 
-//            System.out.println(getX[i] + ", " + getY[i]);
+
             h2.setColor(Color.BLACK);
             h2.fillOval(x, y, r * 2, r * 2);
             h2.setColor(Color.pink);
             h2.drawString("" + key, x, y);
 
         }
-//        Iterator<EdgeData> Edge = g.edgeIter();
-//        while (Edge.hasNext()) {
-//            EdgeData edge_data = Edge.next();
-//
-//            GeoLocation s = g.getNode(edge_data.getSrc()).getLocation();
-//            GeoLocation d = g.getNode(edge_data.getDest()).getLocation();
-//            h2.setColor(Color.BLACK);
-//            h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
-//            if (edge_data.getTag() == 100) {
-//                h2.setColor(Color.RED);
-//                h2.fillOval(getX.get(edge_data.getDest()).intValue(), getY.get(edge_data.getDest()).intValue(), r*2, r*2);
-//                edge_data.setTag(0);
-//            } else {
-//                h2.setColor(Color.BLUE);
-//                h2.drawLine((int) s.x(), (int) s.y(), (int) d.x(), (int) d.y());
-//                h2.setColor(Color.GREEN);
-//                h2.fillOval(getX.get(edge_data.getDest()).intValue(), getY.get(edge_data.getDest()).intValue(),5, 5);
-//
-//
-//            }
-//                NodeData dest = g.getNode(edge_data.getDest());
-//                GeoLocation p2 = dest.getLocation();
-//                if (prev != null) {
-//
-//                    Double dist = p.distance(prev);
-//                    String distStr = String.format("%.2f", dist);
-//                    h2.setFont(new Font("name", Font.PLAIN, 15));
-//                    h2.setColor(Color.ORANGE);
-//                    double x_place = ((((((p.x() + p2.x()) / 2) + p2.x()) / 2) + p2.x()) / 2);
-//                    double y_place = ((((((p.y() + p2.y()) / 2) + p2.y()) / 2) + p2.y()) / 2);
-//                    h2.drawString(distStr, (int) x_place, (int) y_place);
-//                    int j = 0;
-//                    while (j < distStr.length()) {
-//                        if (distStr.charAt(j) == '.') {
-//                            distStr = distStr.substring(0, j + 2);
-//                        }
-//                        j++;
-//                    }
-//
-//                    System.out.println(distStr);
-//
-//                }
-//                prev = p;
-//            }
-//        }
-//        }
-
         Iterator<EdgeData> eIter = g.edgeIter();
         while (eIter.hasNext()) {
             EdgeData e = eIter.next();
@@ -339,7 +310,7 @@ class MyPanel extends JPanel implements MouseInputListener {
             int x2 = getX.get(e.getDest()).intValue(), y2 = getY.get(e.getDest()).intValue();
             if (e.getTag() == 100) {
                 h2.setColor(Color.RED);
-                h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(), r*2, r*2);
+                h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(), r * 2, r * 2);
                 e.setTag(0);
 
             } else {
@@ -348,14 +319,10 @@ class MyPanel extends JPanel implements MouseInputListener {
             }
 
             h2.setColor(Color.GREEN);
-            h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(),5, 5);
+            h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(), 5, 5);
+
         }
     }
 
-
-    private static double[] leftTop(int r, GeoLocation p) {
-        double[] res = {p.x() - r, p.y() - r};
-        return res;
-    }
 
 }
