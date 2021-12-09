@@ -55,7 +55,7 @@ In the class can find the main variables and their implementation:
 
 ## __DWGraph Class:__
 This class implements the interface DirectedWeightedGraph.\
-This class representing  a directional weight graph. Implementation of the graph according to the data structures of  Hash map. In the class can find the functions and their implementation:\
+This class representing  a directional weight graph. Implementation of the graph according to the data structures of  Hash map. In the class can find the functions and their implementation:
 
 | __Main Method__ | __Description__ | __Complexity__|
 | :---------------- | :---------------- | :--------------: |
@@ -77,6 +77,7 @@ This class representing  a directional weight graph. Implementation of the graph
 
 
 __More private functions:__
+
 _edgesCopy(DirectedWeightedGraph g, HashMap edges):_ Method that get a new data structure and duplicate this HashMap of edges.\
 _nodesCopy(DirectedWeightedGraph g, HashMap nodes):_ Method that get a new data structure and duplicate this HashMap of nodes.\
 
@@ -117,7 +118,7 @@ Returns an array of doubles that representing the shortest path to each node (th
 •	_upSideDownGraph():_ This function creates a new graph that will be the graph in the opposite direction of the existing graph.\
 • _BFS(DirectedWeightedGraph, NodeData):_ This function checks if there is a path that passes through all the vertices.\
 • _BFS_isConnected(DirectedWeightedGraph graph, NodeData N):_ This function checks whether the graph is connected ,uses the BFS           algorithm.\
-__Link to the algorithm BSF: https://en.wikipedia.org/wiki/Breadth-first_search.__\
+__Link to the algorithm BSF: https://en.wikipedia.org/wiki/Breadth-first_search.__ \
 • _changeTags():_ This function re-update all the tags of the nodes in the graph to be -1 (NOT VISITED).\
 • _graphJsonDeserializer implements JsonDeserializer<DWGraph>:_ This class implements the Json Deserializer to allow you to load the        Jason file. 
 
