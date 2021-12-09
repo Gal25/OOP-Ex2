@@ -46,15 +46,19 @@ In the class can find the implementation of:
 •	Distance – A variable that get the distance between two nodes.
 
 
-EdgeData_ Class:
+##__EdgeData_ Class:__
 This class implements the interface EdgeData.
 This simple class representing an edge in a directed weighted graph.
 In the class can find the main variables and their implementation:
 
 •	Source – A variable that points on the node ID, determine the point start of the edge.
+
 •	Destination – A variable that points on the node ID, determine the point end of the edge.
+
 •	Weight – A variable that determine the weight of the edge, can not be changed.
+
 •	Info – A variable that get the information on the edge by String, there is an option to update the Info of the vertex, helps in calculating functions in the DWGraph_Algo.
+
 •	Tag- A variable that represent a temporal data (helps in calculating functions in the DWGraph_Algo).
 
 
@@ -63,22 +67,35 @@ This class implements the interface DirectedWeightedGraph.
 This class representing  a directional weight graph. Implementation of the graph according to the data structures of  Hash map. In the class can find the functions and their implementation:
 
 | __Main Method__ | __Description__ | __Complexity__|
+
 | public DWGraph() | default constructor | |
+
 | DWGraph(DirectedWeightedGraph) | deep copy constructor (of graph) | O(1) |
-| edgesCopy(DirectedWeightedGraph, HashMap)| deep copy constructor (of edges) | |
-| nodesCopy(DirectedWeightedGraph, HashMap)| deep copy constructor (of nodes) | |
+
 | getNode(int key) | Returns the node_data by the node_id | O(1) |
+
 | getEdge(int src, int dest) | data of the edge (src,dest) | O(1) |
+
 | addNode(NodeData) | adds a new node to the graph with the given node_data| O(1) |
+
 | connect(int src, int dest, double) | Connects an edge with weight w between node src to node dest | O(1)|
+
 | nodeIter() | returns an Iterator for the collection representing all the nodes in the graph | |
+
 | edgeIter() | eturns an Iterator for all the edges in this graph | |
+
 | edgeIter(int node_id) | returns an Iterator for edges getting out of the given node| |
-| removeNode(int key) | Deletes the node (with the given ID) from the graph and removes all edges which starts or ends at this node.| |
+
+| removeNode(int key) | Deletes the node (with the given ID) from the graph and removes all edges which starts or ends at this node| |
+
 | removeEdge(int src, int dest) | Deletes the edge from the graph | O(1) |
+
 | nodeSize() | number of vertices (nodes) in the graph | O(1) |
+
 | edgeSize() | number of edges (assume directional graph) | O(1) |
+
 | getMC() | Mode Count - for testing changes in the graph | O(1) |
+
 | toString() |  receive a graph as a string |  | 
 
 __More private functions:__
