@@ -135,13 +135,62 @@ For the demo we will select the _center()_ function to see the running time:
 | __Json File__ | __Running Time__|
 | :-------------| :---------------|
 | 1000.json | 1 sec 556 ms |
-| 100000.json | 1 sec, 334 ms |
+| 100000.json | 1 sec 334 ms |
 | 1000000.json| too heavy |
 
   
   
 ## _Algorithmic classes:_
-### __My Frame:__
+### __MyFrame Class:__
+  This class is extends of JFrame and have implements of ActionListener.\
+  This class creates the window where the graph will appear.\
+  The options:
+  
+  ```
+  **_Select file_**:\
+  * load\
+  * save
+  ```
+  ```
+  **_Functions of the Algorithms_**:\
+  * isConnected\
+  * shortestPathDist\
+  * shortestPath\
+  * center\
+  * TSP
+  ``````
+  **_Functions on the graph_**:\
+  * Remove node
+  ```
+
+  
+###  __MyPanel Class:__
+This class implements the full explanation of the actions and how they are actually performed on the graph.\
+For example, different response to mouse uses, setting the graph size in the window, maintaining appropriate proportions of the graph when opening the file, and more.\
+By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:\
+  
+  __select isConnected:__ A window will pop up stating whether the graph is connected or not.\
+  __select shortestPathDist:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
+  __select shortestPath:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes).\
+  __select center:__ A window will pop up stating the center the specific graph.\
+  __select TSP:__ ????\
+  
+  By select the option of "delete node" - A window will open, in which it will be possible to write down the choice of which node whulde you like to delete.
+  
+  ### _How to run a Graph:_
+  By the Ex2 class functions and a jar file, can run the Graph.\
+  
+__Running by the commend line__:\
+  At first, place the files where we know its location on the computer. The desired files are: one of the JSON files (no matter which one) and the JAR file that we created specifically for the Ex2 main class.\
+Example of registering : \
+  ```
+  c:\'name'\'name'\'name'>java -jar Ex2.jar G1.json\
+  ```
+ At second, inside the window that opens, by select the function load it brings the option to select any JSON file from your comuter, and then do any function the you want.
+  
+  
+
+  
   
 
 
