@@ -136,7 +136,7 @@ For the demo we will select the _center()_ function to see the running time:
 | :-------------| :---------------|
 | 1000.json | 1 sec 556 ms |
 | 100000.json | 1 sec 334 ms |
-| 1000000.json| too heavy |
+| 1000000.json| - |
 
   
   
@@ -175,7 +175,7 @@ By select one of the functions under the "Functions of the Algorithms" in the me
   __select shortestPathDist:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
   __select shortestPath:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes).\
   __select center:__ A window will pop up stating the center the specific graph.\
-  __select TSP:__ ????
+  __select TSP:__ A window will open, in which it will be possible to write down the path that you want after clicking `OK`. In every time that you select a node, needs to click `OK`. After finishing selecting the nodes write 'EXIT' and then can see the path marked on the graph.
   
   By select the option of "delete node" - A window will open, in which it will be possible to write down the choice of which node whulde you like to delete.
   
