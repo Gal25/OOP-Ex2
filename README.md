@@ -179,7 +179,7 @@ By select one of the functions under the "Functions of the Algorithms" in the me
   __select TSP:__ A window will open, in which it will be possible to write down the path that you want after clicking `OK`. In every time that you select a node, needs to click `OK`. After finishing selecting the nodes write `EXIT` and then can see the path marked on the graph.
   
   
-By select one of the functions under the "Functions on the graph" in the menuBar, can see the implementation of the functions:
+By select one of the functions under the "Functions on the graph" in the menuBar, can see the implementation of the functions:\
 __select Remove_node__ - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
   __select Remove_edge__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).
 
