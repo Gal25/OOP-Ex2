@@ -169,7 +169,7 @@ For the demo we will select the _center()_ function to see the running time:
 This class is extends of JPanel and have implements of MouseInputListener.\
 This class implements the full explanation of the actions and how they are actually performed on the graph.\
 For example, different response to mouse uses, setting the graph size in the window, maintaining appropriate proportions of the graph when opening the file, and more.\
-By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:\
+By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:
   
   __select isConnected:__ A window will pop up stating whether the graph is connected or not.\
   __select shortestPathDist:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
