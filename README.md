@@ -147,12 +147,12 @@ For the demo we will select the _center()_ function to see the running time:
   The options:
   
   ```
-  **_Select file_**:
+  Select file:
   • load
   • save
   ```
   ```
-  **_Functions of the Algorithms_**:
+  Functions of the Algorithms:
   • isConnected
   • shortestPathDist
   • shortestPath
@@ -160,7 +160,7 @@ For the demo we will select the _center()_ function to see the running time:
   • TSP
   ```
   ```
-  **_Functions on the graph_**:
+  Functions on the graph:
   • Remove node
   ```
 
@@ -179,7 +179,9 @@ By select one of the functions under the "Functions of the Algorithms" in the me
   
   By select the option of "delete node" - A window will open, in which it will be possible to write down the choice of which node whulde you like to delete.
   
-  ### _How to run a Graph:_
+  
+  
+  ## _How to run a Graph:_
   By the Ex2 class functions and a jar file, can run the Graph.
   
 __Running by the commend line__:\
@@ -192,7 +194,7 @@ Example of registering :
   
   
  ```
-  ### External Information:
+  External Information:
   In the src package can find the all tests for all function in this project.
  ```
   
