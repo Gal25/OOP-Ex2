@@ -4,6 +4,7 @@ __By: Dana Cherchenkov and Gal Cohen.__
 
 __Github pages:__
 https://github.com/DanaCherchenkov
+
 https://github.com/Gal25
 
 This project is an assignment in an Object Oriented Programming course at Ariel University.
@@ -20,9 +21,13 @@ This simple class representing a node (vertex) on a directed weighted graph.
 In the class can find the main variables and their implementation:
 
 •	Key -  A key that is used to as each node’s ID.
+
 •	Location -  An object that represent the location of the node by using the GeoLocation class.
+
 •	Wieght – A variable that get the weight of the node, there is an option to update the weight of the vertex,helps in calculating functions in the DWGraph_Algo.
+
 •	Info –  A variable that get the information of the node by String, there is an option to update the Info of the vertex, helps in calculating functions in the DWGraph_Algo.
+
 •	Tag- A variable that used by default: (-1) if the node is not visited (helps in calculating functions in the DWGraph_Algo).
 
 
@@ -33,8 +38,11 @@ Can find that the location determined by values of X, Y, Z.
 In the class can find the implementation of:
 
 •	X  - One of the value that determine the location of the nide.
+
 •	Y -  One of the value that determine the location of the nide.
+
 •	Z - One of the value that determine the location of the nide.
+
 •	Distance – A variable that get the distance between two nodes.
 
 
