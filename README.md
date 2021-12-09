@@ -165,6 +165,7 @@ For the demo we will select the _center()_ function to see the running time:
 
   
 ###  __MyPanel Class:__
+This class is extends of JPanel and have implements of MouseInputListener.\
 This class implements the full explanation of the actions and how they are actually performed on the graph.\
 For example, different response to mouse uses, setting the graph size in the window, maintaining appropriate proportions of the graph when opening the file, and more.\
 By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:\
