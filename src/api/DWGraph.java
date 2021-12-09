@@ -26,7 +26,8 @@ public class DWGraph implements DirectedWeightedGraph{
     /**
      * Deep copy constructor
      * @param g
-     */    public DWGraph(DirectedWeightedGraph g){
+     */
+    public DWGraph(DirectedWeightedGraph g){
         this.edges = new HashMap<>();
         this.nodes = new HashMap<>();
         nodesCopy(g, this.nodes);
