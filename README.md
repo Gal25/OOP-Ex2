@@ -3,6 +3,7 @@
 __By: Dana Cherchenkov and Gal Cohen.__
 
 __Github pages:__
+
 https://github.com/DanaCherchenkov
 
 https://github.com/Gal25
@@ -46,7 +47,7 @@ In the class can find the implementation of:
 •	Distance – A variable that get the distance between two nodes.
 
 
-##__EdgeData_ Class:__
+## __EdgeData_ Class:__
 This class implements the interface EdgeData.
 This simple class representing an edge in a directed weighted graph.
 In the class can find the main variables and their implementation:
@@ -60,6 +61,7 @@ In the class can find the main variables and their implementation:
 •	Info – A variable that get the information on the edge by String, there is an option to update the Info of the vertex, helps in calculating functions in the DWGraph_Algo.
 
 •	Tag- A variable that represent a temporal data (helps in calculating functions in the DWGraph_Algo).
+
 
 
 ## __DWGraph Class:__
