@@ -91,8 +91,8 @@ The implementation according to the data structures of Hash map (the value of th
 
 | __Main Method__ | __Description__ | __Complexity__|
 | :---------------- | :---------------- | :--------------: |
-| DWGraph_Algo() | Default constructor |  |
-| DWGraph_Algo(DirectedWeightedGraph| Constructor |  |
+| DWGraph_Algo() | Default constructor | O(1) |
+| DWGraph_Algo(DirectedWeightedGraph| Constructor | O(1) |
 | init(DirectedWeightedGraph g) | init the graph on which this set of algorithms operates on | O(1) |
 | getGraph() | underlying graph of which specific class works| O(1) |
 | copy() | Computes a deep copy of this weighted graph | O(1) |
