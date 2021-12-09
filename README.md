@@ -135,7 +135,7 @@ For the demo we will select the _center()_ function to see the running time:
 | __Json File__ | __Running Time__|
 | :-------------| :---------------: |
 | 1000.json | 1 sec 556 ms |
-| 100000.json | 1 sec 334 ms |
+| 100000.json |6 minutes 1 sec 334 ms |
 
 
   
