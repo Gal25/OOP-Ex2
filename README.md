@@ -136,7 +136,7 @@ For the demo we will select the _center()_ function to see the running time:
 | :-------------| :---------------: |
 | 1000.json | 1 sec 556 ms |
 | 100000.json | 1 sec 334 ms |
-| 1000000.json| - |
+
 
   
   
