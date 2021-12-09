@@ -1,11 +1,12 @@
 # OOP-Ex2
-'''
+```
 __By: Dana Cherchenkov and Gal Cohen.__
 
 __Github pages:__
 https://github.com/DanaCherchenkov 
+
 https://github.com/Gal25
-'''
+```
 
 This project is an assignment in an Object Oriented Programming course at Ariel University.
 In the project we were asked to design and implement data structures and algorithms of graphs (directed and weighted). 
