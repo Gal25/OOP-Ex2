@@ -1,4 +1,18 @@
-{
+package GUI;
+
+import api.*;
+import org.w3c.dom.Node;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.*;
+import java.util.List;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputListener;
+
+class MyPanel extends JPanel implements MouseInputListener {
 
     public int brushSize = 10;
     private int mouseX = -1;
