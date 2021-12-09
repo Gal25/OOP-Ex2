@@ -123,6 +123,25 @@ __Link to the algorithm BSF: https://en.wikipedia.org/wiki/Breadth-first_search.
 • **_graphJsonDeserializer implements JsonDeserializer<DWGraph>:_** This class implements the Json Deserializer to allow you to load the        Jason file. 
 
   
+## GUI PACKAGE
+In this part of the project can see the graphical implementation of all the interfaces from the first part. Using JAVA SWING which is a part of Java Foundation Classes (JFC) that is used to create window-based applications.\
+There is use of the JFrame and JPanel class. With the help of the functions given within the libreries and the corresponding implementation for them, we will get an overall picture of the graph.\
+There is a menuBar where we can choose which JSON file is selected to load or to save, and in addition there is the use of the functions of the class DWGrapg_Algo and once we select the implementation of one of them is seen directly on the graph.\
+The JSON files contain different graphs and range from G1 to G3.
+In addition, we will see from the following table the runtimes for multi-vertices and edges (which are not in these classes):
+
+For the demo we will select the _center()_ function to see the running time:
+  
+| __Json File__ | __Running Time__|
+| :-------------| :---------------|
+| 1000.json | 1 sec 556 ms |
+| 100000.json | 1 sec, 334 ms |
+| 1000000.json| too heavy |
+
+  
+  
+## _Algorithmic classes:_
+### __My Frame:__
   
 
 
