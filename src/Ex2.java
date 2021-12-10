@@ -12,6 +12,7 @@ import javax.swing.*;
 public class Ex2 {
     /**
      * This static function will be used to test your implementation
+     *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return
      */
@@ -20,12 +21,13 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms algo = new DWGraph_Algo();
         algo.init(g);
         algo.load(json_file);
-        DirectedWeightedGraph ans = algo.copy();
-        return ans;
+        return algo.getGraph();
 
     }
+
     /**
      * This static function will be used to test your implementation
+     *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return
      */
@@ -37,37 +39,22 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = algo;
         return ans;
     }
+
     /**
      * This static function will run your GUI using the json fime.
-     * @param json_file - a json file (e.g., G1.json - G3.gson)
      *
+     * @param json_file - a json file (e.g., G1.json - G3.gson)
      */
     public static void runGUI(String json_file) {
-        DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         MyFrame mainFrame = new MyFrame(json_file);
         mainFrame.setTitle("Graph");
         mainFrame.setVisible(true);
-//        alg.load(json_file);
     }
 
-    public static void main(String[] args){
-//        DirectedWeightedGraph g = new DWGraph();
-//        DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
-//        g_algo.init(g);
-//        g_algo.load("data/G1.json");
-//
-//        System.out.println(g_algo);
-        MyFrame mainFrame = new MyFrame();
-        mainFrame.setTitle("Graph");
-        mainFrame.setVisible(true);
-//        g_algo.save("fd.json");
+    public static void main(String[] args) {
+        String file= args[0];
 
+        runGUI(file);
+        
     }
-
-//    public static void main(String[] args) {
-//        String file= args[0];
-//
-//        runGUI(file);
-//
-//    }
 }
