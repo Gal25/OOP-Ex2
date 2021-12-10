@@ -1,16 +1,13 @@
 package GUI;
 
-import api.DWGraph;
-import api.DWGraph_Algo;
-import api.DirectedWeightedGraph;
-import api.DirectedWeightedGraphAlgorithms;
+import api.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-//import MyPanel;
+
 
 public class MyFrame extends JFrame implements ActionListener {
 
@@ -22,7 +19,6 @@ public class MyFrame extends JFrame implements ActionListener {
     private MenuItem tsp;
     private MenuItem LoadGraph;
     private MenuItem SaveGraph;
-//    private MenuItem Graph3;
     private MenuItem remove_node;
     private MenuItem remove_edge;
     private MenuItem add_node;
@@ -39,6 +35,7 @@ public class MyFrame extends JFrame implements ActionListener {
         DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
         gg.load(json_file);
         g = gg.getGraph();
+        myPanel.reset();
         myPanel.setGraph(g);
         repaint();
 
@@ -48,14 +45,10 @@ public class MyFrame extends JFrame implements ActionListener {
         initFrame();
         addMenu();
         initPanel();
-
-
-
-
     }
 
     private void initFrame(){
-        this.setSize(500,500);
+        this.setSize(new Dimension(900,500));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -85,9 +78,6 @@ public class MyFrame extends JFrame implements ActionListener {
 
         SaveGraph = new MenuItem("Save Graph");
         SaveGraph.addActionListener(this);
-
-//        Graph3 = new MenuItem("Graph3");
-//        Graph3.addActionListener(this);
 
         isConnected = new MenuItem("isConnected");
         isConnected.addActionListener(this);
@@ -137,6 +127,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
                 gg.load(file);
                 g = gg.getGraph();
+                myPanel.reset();
                 myPanel.setGraph(g);
                 repaint();
                 System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
@@ -181,7 +172,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
 
         if (e.getSource() == isConnected){
-             myPanel.isConnected();
+            myPanel.isConnected();
         }
         if (e.getSource() == Center){
             myPanel.Center();
@@ -196,8 +187,16 @@ public class MyFrame extends JFrame implements ActionListener {
             myPanel.tsp();
         }
 
-        if(e.getSource() == add_node){
+        if(e.getSource() == remove_node){
+            myPanel.RemoveNode();
+        }
 
+        if(e.getSource() == remove_edge){
+            myPanel.remove_Edge();
+        }
+
+        if(e.getSource() == add_node){
+            myPanel.add_node();
         }
 
 
@@ -207,10 +206,5 @@ public class MyFrame extends JFrame implements ActionListener {
         this.add(myPanel);
     }
 
-//    @Override
-//    public void paintComponents(Graphics g) {
-////        System.out.println(2);
-//        super.paintComponents(g);
-//    }
 
 }
