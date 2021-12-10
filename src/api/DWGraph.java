@@ -44,7 +44,7 @@ public class DWGraph implements DirectedWeightedGraph{
     private HashMap<Integer, HashMap<Integer, EdgeData>> edgesCopy(DirectedWeightedGraph g, HashMap edges) {
         HashMap<Integer, HashMap<Integer, EdgeData>> h = edges;
         Iterator<EdgeData> it = g.edgeIter();
-        while ( it.hasNext()) {
+        while (it.hasNext()) {
             EdgeData E = it.next();
             this.edges.get(E.getSrc()).put(E.getDest(), E);
         }
@@ -154,12 +154,15 @@ public class DWGraph implements DirectedWeightedGraph{
     public Iterator<EdgeData> edgeIter() {
         int MC= this.mc;
         Collection<EdgeData> E =  new ArrayList<>();
-        for (int i= 0; i < sizeNode; i++){
-            Iterator<EdgeData> R = this.edgeIter(i);
+        Iterator<NodeData> n = nodeIter();
+        while(n.hasNext()){
+            NodeData ne = n.next();
+            Iterator<EdgeData> R = this.edgeIter(ne.getKey());
             while (R.hasNext()) {
                 E.add(R.next());
             }
         }
+
         if(MC != mc){
             throw new RuntimeException();
         }
@@ -191,12 +194,12 @@ public class DWGraph implements DirectedWeightedGraph{
 
             Collection<Integer> E = edges.keySet();
             for (int i : E){
-                if(edges.get(i).containsKey(key)){
+//                if(edges.get(i).containsKey(key)){
                     edges.get(i).remove(key);
                     sizeEdges--;
                     mc++;
 
-                }
+//                }
             }
             NodeData N_remove = nodes.remove(key);
             sizeNode--;
@@ -216,7 +219,7 @@ public class DWGraph implements DirectedWeightedGraph{
      */
     @Override
     public EdgeData removeEdge(int src, int dest) {
-        EdgeData E = edges.get(src).remove(dest);
+            EdgeData E = edges.get(src).remove(dest);
 
         if(E != null){
             sizeEdges--;
