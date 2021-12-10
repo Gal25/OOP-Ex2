@@ -168,7 +168,7 @@ For the demo we will select the _center()_ function to see the running time:
 
   
 ###  __MyPanel Class:__
-This class is extends of JPanel and have implements of MouseInputListener.\
+This class is extends of JPanel.\
 This class implements the full explanation of the actions and how they are actually performed on the graph.\
 For example, different response to mouse uses, setting the graph size in the window, maintaining appropriate proportions of the graph when opening the file, and more.\
 By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:
@@ -184,7 +184,7 @@ By select one of the functions under the "Functions of the Algorithms" in the me
 By select one of the functions under the "Functions on the graph" in the menuBar, can see the implementation of the functions:\
 __`select Remove_node`__ - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
 __`select Remove_edge`__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).\
-PAY ATTENTION! The graph shown is a weighted directed graph so must pay attention to the direction of the edges. There is a possibility that between two nodes there is an edge in the direction of one node and a second edge in the direction of a second node, so if one of them is deleted, the difference is not visually visible, but in practice the rib is deleted.\
+PAY ATTENTION! The graph shown is a weighted directed graph so must pay attention to the direction of the edges. There is a possibility that between two nodes there is an edge in the direction of one node and a second edge in the direction of a second node, so if one of them is deleted, the difference is not visually visible, but in practice the rib is deleted (to delet completly the edge you will to do the action - Remove_edge twice, first from source node to destination node and second from the destination node to source node.\
 __`select Add_node`__ - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
   
   
