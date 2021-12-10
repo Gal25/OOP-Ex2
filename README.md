@@ -163,6 +163,7 @@ For the demo we will select the _center()_ function to see the running time:
   Functions on the graph:
   • Remove_node
   • Remove_edge
+  • Edd_node
   ```
 
   
@@ -181,8 +182,8 @@ By select one of the functions under the "Functions of the Algorithms" in the me
   
 By select one of the functions under the "Functions on the graph" in the menuBar, can see the implementation of the functions:\
 __select Remove_node__ - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
-  __select Remove_edge__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).
-
+  __select Remove_edge__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).\
+__select Edd_node__ - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
   
   
   
