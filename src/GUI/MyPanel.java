@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 
-class MyPanel extends JPanel implements MouseInputListener {
+class MyPanel extends JPanel  {
 
     public int brushSize = 10;
     private int mouseX = -1;
@@ -25,6 +25,18 @@ class MyPanel extends JPanel implements MouseInputListener {
     private static DirectedWeightedGraph g_paint = new DWGraph();
     private static DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo();
     private int counter = 0;
+    private int r = 7;
+    private double maxX = Double.MIN_VALUE;
+    private double maxY = Double.MIN_VALUE;
+    private double minX = Double.MAX_VALUE;
+    private double minY = Double.MAX_VALUE;
+
+    private HashMap<Integer, Double> getX = new HashMap<>();
+    private HashMap<Integer, Double> getY = new HashMap<>();
+
+    private final int marginX = 50;
+    private final int marginY = 50;
+
 
     public MyPanel() {
         super();
@@ -33,35 +45,129 @@ class MyPanel extends JPanel implements MouseInputListener {
         int height = screensize.height;
         this.setBackground(Color.white);
         this.setPreferredSize(new Dimension(width, height));
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
+//        this.addMouseListener(this);
+//        this.addMouseMotionListener(this);
 
     }
 
+    private void setMinimum() {
+        Iterator<NodeData> it = g.nodeIter();
+        while (it.hasNext()) {
+            NodeData node = it.next();
+            if (node.getLocation().x() < minX) {
+                minX = node.getLocation().x();
+            }
+            if (node.getLocation().y() < minY) {
+                minY = node.getLocation().y();
+            }
+        }
+    }
+
+    private void setMaximum() {
+        Iterator<NodeData> it = g.nodeIter();
+        while (it.hasNext()) {
+            NodeData node = it.next();
+            if (node.getLocation().x() > maxX) {
+                maxX = node.getLocation().x();
+            }
+            if (node.getLocation().y() > maxY) {
+                maxY = node.getLocation().y();
+            }
+        }
+    }
+
+    //    private void setMinMax(){
+//        Iterator<NodeData> it = g.nodeIter();
+//        while (it.hasNext()) {
+//            NodeData node = it.next();
+//            GeoLocation p = node.getLocation();
+//            if (p.x() < minX) {
+//                minX = p.x();
+//            }
+//            if (p.y() < minY) {
+//                minY = p.y();
+//            }
+//            if (p.x() > maxX) {
+//                maxX = p.x();
+//            }
+//            if (p.y() > maxY) {
+//                maxY = p.y();
+//            }
+//        }
+//
+//    }
+
+    public void reset(){
+        maxX = Double.MIN_VALUE;
+        maxY = Double.MIN_VALUE;
+        minX = Double.MAX_VALUE;
+        minY = Double.MAX_VALUE;
+        getX = new HashMap<>();
+        getY = new HashMap<>();
+
+
+    }
+
+
+    private void setMinMax(){
+        Iterator<NodeData> it = g.nodeIter();
+        while (it.hasNext()) {
+            NodeData node = it.next();
+            double X = this.getX.get(node.getKey());
+            double Y = this.getY.get(node.getKey());
+            if (X < minX) {
+                minX = X;
+            }
+            if (Y < minY) {
+                minY = Y;
+            }
+            if (X > maxX) {
+                maxX = X;
+            }
+            if (Y > maxY) {
+                maxY = Y;
+            }
+        }
+    }
 
     public void setGraph(DirectedWeightedGraph g1) {
         this.g = g1;
+
+        for (Iterator<NodeData> it = g.nodeIter(); it.hasNext(); ) {
+            NodeData node = it.next();
+            GeoLocation p = node.getLocation();
+            getX.put(node.getKey(), p.x());
+            getY.put(node.getKey(), p.y());
+        }
+        this.setMinMax();
+        this.mapRange(this.getX, this.minX, this.maxX, this.marginX, this.getWidth() - this.marginX);
+        this.mapRange(this.getY, this.minY, this.maxY, this.marginY, this.getHeight() - this.marginY);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        message = "";
-        int x = e.getX();
-        int y = e.getY();
-        GeoLocation_ p =new GeoLocation_(x,y,0);
-        while (g.getNode(this.counter) != null ) {
-            this.counter++;
+
+    public void RemoveNode() {
+
+        JFrame frame = new JFrame();
+        String source = JOptionPane.showInputDialog(frame,"Node To Remove");
+//        String source = "0";
+        try {
+            int src = Integer.parseInt(source);
+            NodeData n = g.removeNode(src);
+            double X = getX.get(n.getKey());
+            double Y = getY.get(n.getKey());
+            this.getX.remove(n.getKey());
+            this.getY.remove(n.getKey());
+            if (X >= maxX || Y >= maxY || X <= minX || Y <= minY) {
+                this.setMinMax();
+                this.mapRange(this.getX, this.minX, this.maxX, this.marginX, this.getWidth() - this.marginX);
+                this.mapRange(this.getY, this.minY, this.maxY, this.marginY, this.getHeight() - this.marginY);
+            }
+            //g_algo.init(g);
+            repaint();
         }
-        NodeData_ N = new NodeData_(p, this.counter);
-        g.addNode(N);
-
-//            this.waitingNode = N;
-//             nodes.add(N);
-        repaint();
-        System.out.println("mouseClicked");
-        System.out.println(x + " " + y);
-
-
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void add_node(){
@@ -77,61 +183,34 @@ class MyPanel extends JPanel implements MouseInputListener {
                 null, "enter the z location of the node that you want to add: ");
         NodeData curr = new NodeData_(new GeoLocation_(Integer.parseInt(locationX),Integer.parseInt(locationY), Integer.parseInt(locationZ)), Integer.parseInt(node));
         g.addNode(curr);
+        double X = curr.getLocation().x() -r;
+        double Y = curr.getLocation().y() -r;
+        this.getX.put(curr.getKey(), X);
+        this.getY.put(curr.getKey(), Y);
+        if (X >= maxX || Y >= maxY || X <= minX || Y <= minY) {
+            this.setMinMax();
+            this.mapRange(this.getX, this.minX, this.maxX, this.marginX, this.getWidth() - this.marginX);
+            this.mapRange(this.getY, this.minY, this.maxY, this.marginY, this.getHeight() - this.marginY);
+        }
+        double minDist = Double.MAX_VALUE;
+        int cKey = Integer.MIN_VALUE;
+        Iterator<NodeData> it = g.nodeIter();
+        int curKey = curr.getKey();
+        while ((it.hasNext())){
+            NodeData n = it.next();
+            int k = n.getKey();
+//            double dist = n.getLocation().distance(new GeoLocation_(this.getX.get(curr.getKey()), this.getY.get(curr.getKey()),0));
+            double dist = Math.sqrt(Math.pow(this.getX.get(k) - this.getX.get(curKey),2) + Math.pow(this.getY.get(k) - this.getY.get(curKey),2));
+            if(dist < minDist && n.getKey() != curr.getKey()){
+                minDist = dist;
+                cKey = n.getKey();
+            }
+        }
+        g.connect(cKey, curr.getKey(), minDist);
         repaint();
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        System.out.println("mousePressed");
-    }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        this.mousePressed = false;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        System.out.println("mouseEntered");
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        System.out.println("mouseExited");
-
-    }
-
-
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        this.mousePressed = true;
-        this.mouseX = e.getX();
-        this.mouseY = e.getY();
-//        this.repaint(this.mouseX, this.mouseY, this.brushSize, this.brushSize);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    public void remove_Node() {
-        JFrame input = new JFrame();
-        StringBuilder s = new StringBuilder();
-        String node = JOptionPane.showInputDialog(
-                null, "which vertex you want to remove?");
-
-        NodeData curr = new NodeData_(Integer.parseInt(node));
-        if (g.getNode(curr.getKey()) == null) {
-            JOptionPane.showMessageDialog(input, "This graph does not contain the vertex: " + node);
-        } else {
-            g.removeNode(curr.getKey());
-            removeEdgeWithNode(curr);
-
-        }
-    }
 
 
     private void removeEdgeWithNode(NodeData N) {
@@ -145,13 +224,24 @@ class MyPanel extends JPanel implements MouseInputListener {
     }
 
 
-    private void remove_Edge(EdgeData E){
-        Iterator<EdgeData> it = g.edgeIter();
-        while(it.hasNext()){
-            EdgeData edge= it.next();
-            if(edge.getSrc() == E.getSrc() && edge.getDest() == E.getDest()){
-                g.removeEdge(edge.getSrc(), edge.getDest());
-            }
+    public void remove_Edge(){
+        JFrame frame = new JFrame();
+        String source = JOptionPane.showInputDialog(frame,"Source Node");
+        String dest = JOptionPane.showInputDialog(frame,"Destination Node");
+//        String source = "0";
+//        String dest = "16";
+
+        try {
+            int src = Integer.parseInt(source);
+            int des = Integer.parseInt(dest);
+            System.out.println(g.getEdge(src,des));
+            g.removeEdge(src, des);
+            System.out.println(g.getEdge(src,des));
+//            g_algo.init(g);
+            repaint();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -275,31 +365,22 @@ class MyPanel extends JPanel implements MouseInputListener {
     }
 
     @Override
-    protected void paintComponent(Graphics h) {
+    public void paint(Graphics h) {
+//        RemoveNode();
         System.out.println("Repainted");
-        HashMap<Integer, Double> getX = new HashMap<>(g.nodeSize());
-        HashMap<Integer, Double> getY = new HashMap<>(g.nodeSize());
         Graphics2D h2 = (Graphics2D) h;
         super.paintComponent(h2);
         h2.setStroke(new BasicStroke(2));
         super.paintComponent(h2);
-        int r = 7;
 
-        Iterator<NodeData> Nodes = this.g.nodeIter();
-        while (Nodes.hasNext()) {
-            NodeData node_data = Nodes.next();
-            GeoLocation p = node_data.getLocation();
-            getX.put(node_data.getKey(), p.x());
-            getY.put(node_data.getKey(), p.y());
-        }
-        int marginX = 50;
-        int marginY = 50;
+
+
 //        System.out.println(this.getWidth() + " ---- " + this.getHeight());
 //        System.out.println(getX);
 //        double[] rangeX = mapRange(getX, marginX, this.getWidth() - marginX);
 //        double[] rangeY = mapRange(getY, marginY, this.getHeight() - marginY);
-        mapRange(getX, marginX, this.getWidth() - marginX);
-        mapRange(getY, marginY, this.getHeight() - marginY);
+//        mapRange(getX, marginX, this.getWidth() - marginX);
+//        mapRange(getY, marginY, this.getHeight() - marginY);
 
         Iterator<NodeData> it = g.nodeIter();
         while (it.hasNext()) {
@@ -320,6 +401,7 @@ class MyPanel extends JPanel implements MouseInputListener {
         Iterator<EdgeData> eIter = g.edgeIter();
         while (eIter.hasNext()) {
             EdgeData e = eIter.next();
+            System.out.println(1);
             int x1 = getX.get(e.getSrc()).intValue(), y1 = getY.get(e.getSrc()).intValue();
             int x2 = getX.get(e.getDest()).intValue(), y2 = getY.get(e.getDest()).intValue();
             if (e.getTag() == 100) {
@@ -329,13 +411,14 @@ class MyPanel extends JPanel implements MouseInputListener {
 
             } else {
                 h2.setColor(Color.BLUE);
-                h2.drawLine(x1 + r, y1 + r, x2 + r, y2 + r);
-            }
 
+            }
+            h2.drawLine(x1 + r, y1 + r, x2 + r, y2 + r);
             h2.setColor(Color.GREEN);
             h2.fillOval(getX.get(e.getDest()).intValue(), getY.get(e.getDest()).intValue(), 5, 5);
 
         }
+
     }
 
 
