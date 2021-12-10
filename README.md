@@ -185,7 +185,7 @@ By select one of the functions under the "Functions on the graph" in the menuBar
 __`select Remove_node`__ - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
 __`select Remove_edge`__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).\
 PAY ATTENTION! The graph shown is a weighted directed graph so must pay attention to the direction of the edges. There is a possibility that between two nodes there is an edge in the direction of one node and a second edge in the direction of a second node, so if one of them is deleted, the difference is not visually visible, but in practice the rib is deleted.\
-__`select Edd_node`__ - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
+__`select Add_node`__ - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
   
   
   
