@@ -1,5 +1,3 @@
-package GUI;
-
 import api.*;
 
 import javax.swing.*;
@@ -7,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 
 public class MyFrame extends JFrame implements ActionListener {
 
@@ -24,35 +21,41 @@ public class MyFrame extends JFrame implements ActionListener {
     private MenuItem add_node;
 
 
-
     private static DirectedWeightedGraph g = new DWGraph();
-    MyPanel myPanel= new MyPanel();
+    private MyPanel myPanel = new MyPanel();
 
-    public MyFrame(String json_file){
+    public MyFrame(String json_file) {
         initFrame();
         addMenu();
         initPanel();
-        DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
+        DirectedWeightedGraphAlgorithms gg = new DWGraph_Algo();
         gg.load(json_file);
         g = gg.getGraph();
         myPanel.reset();
         myPanel.setGraph(g);
         repaint();
-
     }
 
-    public MyFrame(){
+    public MyFrame() {
         initFrame();
         addMenu();
         initPanel();
     }
 
-    private void initFrame(){
-        this.setSize(new Dimension(900,500));
+
+    private void initFrame() {
+        this.setSize(new Dimension(900, 500));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.myPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                myPanel.reProportions();
+                myPanel.repaint();
+            }
+        });
     }
 
-    private void addMenu(){
+    private void addMenu() {
         MenuBar menuBar = new MenuBar();
         Menu select = new Menu("Select file");
         Menu menu = new Menu("Functions of the algorithms");
@@ -105,17 +108,15 @@ public class MyFrame extends JFrame implements ActionListener {
         menu.add(shortestPath);
         menu.add(tsp);
 
-//        select.add(Graph3);
-
-
 
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == LoadGraph ){
-            DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
+        if (e.getSource() == LoadGraph) {
+            DirectedWeightedGraphAlgorithms gg = new DWGraph_Algo();
             JFrame parentFrame = new JFrame();
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Specify a file to load");
@@ -123,19 +124,20 @@ public class MyFrame extends JFrame implements ActionListener {
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File fileToLoad = fileChooser.getSelectedFile();
-                String file= fileToLoad.getAbsolutePath();
+                String file = fileToLoad.getAbsolutePath();
 
                 gg.load(file);
                 g = gg.getGraph();
                 myPanel.reset();
                 myPanel.setGraph(g);
+                myPanel.reProportions();
                 repaint();
                 System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
             }
         }
 
-        if(e.getSource() == SaveGraph ){
-            DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
+        if (e.getSource() == SaveGraph) {
+            DirectedWeightedGraphAlgorithms gg = new DWGraph_Algo();
             JFrame parentFrame = new JFrame();
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Specify a file to load");
@@ -143,7 +145,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File fileToSave = fileChooser.getSelectedFile();
-                String file= fileToSave.getAbsolutePath();
+                String file = fileToSave.getAbsolutePath();
                 gg.save(file);
                 g = gg.getGraph();
                 myPanel.setGraph(g);
@@ -152,57 +154,39 @@ public class MyFrame extends JFrame implements ActionListener {
             }
         }
 
-//        if(e.getSource() == Graph3 ){
-//            DirectedWeightedGraphAlgorithms gg= new DWGraph_Algo();
-//            JFrame parentFrame = new JFrame();
-//            JFileChooser fileChooser = new JFileChooser();
-//            fileChooser.setDialogTitle("Specify a file to load");
-//            int userSelection = fileChooser.showOpenDialog(parentFrame);
-//
-//            if (userSelection == JFileChooser.APPROVE_OPTION) {
-//                File fileToLoad = fileChooser.getSelectedFile();
-//                String file= fileToLoad.getAbsolutePath();
-//                gg.load(file);
-//                g = gg.getGraph();
-//                myPanel.setGraph(g);
-//                repaint();
-//                System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
-//            }
 
-
-
-        if (e.getSource() == isConnected){
+        if (e.getSource() == isConnected) {
             myPanel.isConnected();
         }
-        if (e.getSource() == Center){
+        if (e.getSource() == Center) {
             myPanel.Center();
         }
-        if (e.getSource() == shortestPathDist){
+        if (e.getSource() == shortestPathDist) {
             myPanel.shortestPathDist();
         }
-        if (e.getSource() == shortestPath){
+        if (e.getSource() == shortestPath) {
             myPanel.shortestPath();
         }
-        if (e.getSource() == tsp){
+        if (e.getSource() == tsp) {
             myPanel.tsp();
         }
 
-        if(e.getSource() == remove_node){
+        if (e.getSource() == remove_node) {
             myPanel.RemoveNode();
         }
 
-        if(e.getSource() == remove_edge){
+        if (e.getSource() == remove_edge) {
             myPanel.remove_Edge();
         }
 
-        if(e.getSource() == add_node){
+        if (e.getSource() == add_node) {
             myPanel.add_node();
         }
 
 
     }
 
-    private void initPanel(){
+    private void initPanel() {
         this.add(myPanel);
     }
 
