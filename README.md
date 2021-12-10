@@ -175,7 +175,7 @@ By select one of the functions under the "Functions of the Algorithms" in the me
   
   __`select isConnected:`__ A window will pop up stating whether the graph is connected or not.\
   __`select shortestPathDist:`__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
-  __`select shortestPath:`__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes and will seen a red line on the graph represrnting the shortestPath).\
+  __`select shortestPath:`__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes and will seen a red line on the graph represents the shortestPath).\
   __`select center:`__ A window will pop up stating the center the specific graph.\
   __`select TSP:`__ A window will open, in which it will be possible to write down the path that you want after clicking `OK`. In every time that you select a node, needs to click `OK`. After finishing selecting the nodes write `Exit` and then can see the path marked on the graph (with red line).
   
