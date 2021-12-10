@@ -173,17 +173,18 @@ This class implements the full explanation of the actions and how they are actua
 For example, different response to mouse uses, setting the graph size in the window, maintaining appropriate proportions of the graph when opening the file, and more.\
 By select one of the functions under the "Functions of the Algorithms" in the menuBar, can see the implementation of the functions:
   
-  __select isConnected:__ A window will pop up stating whether the graph is connected or not.\
-  __select shortestPathDist:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
-  __select shortestPath:__  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes).\
-  __select center:__ A window will pop up stating the center the specific graph.\
-  __select TSP:__ A window will open, in which it will be possible to write down the path that you want after clicking `OK`. In every time that you select a node, needs to click `OK`. After finishing selecting the nodes write `EXIT` and then can see the path marked on the graph.
+  `__select isConnected:__` A window will pop up stating whether the graph is connected or not.\
+  `__select shortestPathDist:__`  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a numerical answer).\
+  `__select shortestPath:__`  A window will open, in which it will be possible to write down the choice of destination and the source of the nodes. Between them we will get the shortest path (return a string of nodes).\
+  `__select center:__` A window will pop up stating the center the specific graph.\
+  `__select TSP:__` A window will open, in which it will be possible to write down the path that you want after clicking `OK`. In every time that you select a node, needs to click `OK`. After finishing selecting the nodes write `EXIT` and then can see the path marked on the graph.
   
+ 
   
 By select one of the functions under the "Functions on the graph" in the menuBar, can see the implementation of the functions:\
-__select Remove_node__ - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
-  __select Remove_edge__ - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).\
-__select Edd_node__ - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
+`__select Remove_node__` - A window will open, in which it will be possible to write down the choice of which node would you like to delete.\
+`__select Remove_edge__` - A window will open, in which it will be possible to write down the choice of which edge would you like to delete (select a src and dest).\
+`__select Edd_node__` - A window will open, in which it will be possible to write down the choice of which node you woulde like to add and in which location.
   
   
   
