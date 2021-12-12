@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DWGraphTest {
     private static DirectedWeightedGraph graph = new DWGraph();
-    
+
     public DWGraphTest() {
     		for (int i = 0; i < 10; i++) {
     			NodeData n = new NodeData_(i, i,  new GeoLocation_(i, i+1, i+2));
