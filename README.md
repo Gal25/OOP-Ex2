@@ -135,7 +135,15 @@ For the demo we will select the _center()_ function to see the running time:
 | __Json File__ | __Running Time__|
 | :-------------| :---------------: |
 | 1000.json | 1 sec 556 ms |
-| 100000.json |6 minutes 1 sec 334 ms |
+| 10000.json |6 minutes 1 sec 334 ms |
+| 100000.json |timeout |
+  
+ For the demo we will select the isConnected()_ function to see the running time:
+| __Json File__ | __Running Time__|
+| :-------------| :---------------: |
+| 1000.json | 1 sec 884 ms |
+| 10000.json |2 sec 209 ms |
+| 100000.json |1 sec 792 ms |
 
 
   
@@ -198,7 +206,7 @@ Example of registering :
   ```
   c:\'name'\'name'\'name'>java -jar Ex2.jar G1.json
   ```
- At second, inside the window that opens, by select the function load it brings the option to select any JSON file from your comuter, and then do any function the you want.
+ At second, inside the window that opens, by select the function load it brings the option to select any JSON file from your comuter, and then do any function that you want.
   
   
  ```
