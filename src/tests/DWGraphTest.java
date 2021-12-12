@@ -8,8 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DWGraphTest {
     private static DirectedWeightedGraph graph = new DWGraph();
-
-
+    
     public DWGraphTest() {
     		for (int i = 0; i < 10; i++) {
     			NodeData n = new NodeData_(i, i,  new GeoLocation_(i, i+1, i+2));
@@ -68,12 +67,10 @@ class DWGraphTest {
     void removeNode() {
         DirectedWeightedGraph graph2 = new DWGraph();
         NodeData node1 = new NodeData_(1,1,  new GeoLocation_(1,2,3));
-        NodeData node2 = new NodeData_(10,1, new GeoLocation_(3,4,5));
+        NodeData node2 = new NodeData_(2,1, new GeoLocation_(3,4,5));
         graph2.addNode(node1);
         graph2.addNode(node2);
-
         graph2.removeNode(1);
-
         assertEquals(1, graph2.nodeSize());
    }
 
@@ -87,8 +84,6 @@ class DWGraphTest {
         graph.removeEdge(2, 3);
         graph.removeEdge(4, 5);
         assertEquals(2, graph.edgeSize());
-
-
     }
 
     @Test
