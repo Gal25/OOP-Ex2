@@ -194,12 +194,12 @@ public class DWGraph implements DirectedWeightedGraph{
 
             Collection<Integer> E = edges.keySet();
             for (int i : E){
-//                if(edges.get(i).containsKey(key)){
+                if(edges.get(i).containsKey(key)){
                     edges.get(i).remove(key);
                     sizeEdges--;
                     mc++;
 
-//                }
+                }
             }
             NodeData N_remove = nodes.remove(key);
             sizeNode--;
@@ -258,29 +258,27 @@ public class DWGraph implements DirectedWeightedGraph{
      * @return
      */
     public String toString() {
-        String nodesValue = "{";
+        String nodesVal = "{";
         for (NodeData n : nodes.values()) {
-            nodesValue += n;
+            nodesVal += n;
         }
-        nodesValue += "}";
-
-        String edgesValue = "{";
+        nodesVal += "}";
+        String edgesVal = "{";
         for (HashMap h : edges.values()) {
             if (!h.values().isEmpty()) {
-                edgesValue += "{ ";
+                edgesVal += "{ ";
                 for (Object o : h.values()) {
                     EdgeData e = (EdgeData) o;
-                    edgesValue += e + " ";
-
+                    edgesVal += e + " ";
                 }
-                edgesValue += "}";
+                edgesVal += "}";
             }
         }
-        edgesValue += "}";
+        edgesVal += "}";
 
-        return "DWGraph{" +
-                "nodes=" + nodesValue +
-                ", edges=" + edgesValue +
+        return "Graph{" +
+                "nodes=" + nodesVal +
+                ", edges=" + edgesVal +
                 '}';
     }
 
