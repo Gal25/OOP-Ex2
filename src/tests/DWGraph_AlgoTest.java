@@ -18,8 +18,7 @@ class DWGraph_AlgoTest {
 
     public DWGraph_AlgoTest() {
         for (int i = 0; i < 5; i++) {
-            GeoLocation p = new GeoLocation_(i, i+1, i+2);
-            NodeData n = new NodeData_(i, i, p);
+            NodeData n = new NodeData_(i, i, new GeoLocation_(i, i+1, i+2));
             g.addNode(n);
         }
 
@@ -50,32 +49,28 @@ class DWGraph_AlgoTest {
         g.connect(2, 3, 2);
         g.connect(3, 4, 3);
         g.connect(4, 0, 4);
+
         assertTrue(g_algo.isConnected());
 
         g.removeEdge(0, 1);
         assertFalse(g_algo.isConnected());
 
         DirectedWeightedGraph graph = new DWGraph();
-        DirectedWeightedGraphAlgorithms graphA = new DWGraph_Algo();
+        DirectedWeightedGraphAlgorithms graph_a = new DWGraph_Algo();
         graph.addNode(new NodeData_(0, 1, new GeoLocation_(0,0,0)));
-        graphA.init(graph);
-        assertTrue(graphA.isConnected());
+        graph_a.init(graph);
+        assertTrue(graph_a.isConnected());
     }
 
     @Test
     void shortestPathDist() {
         DWGraph graph = new DWGraph();
         DirectedWeightedGraphAlgorithms g_algo = new DWGraph_Algo(graph);
-        GeoLocation_ g1= new GeoLocation_(0,1,0);
-        GeoLocation_ g2 = new GeoLocation_(2,3,0);
-        GeoLocation_ g3 = new GeoLocation_(4,5,0);
-        GeoLocation_ g4 = new GeoLocation_(6,1,0);
-        GeoLocation_ g5 = new GeoLocation_(3,4,0);
-        NodeData_ n0 = new NodeData_(0,0,g1);
-        NodeData_ n1 = new NodeData_(1,1,g2);
-        NodeData_ n2 = new NodeData_(2,1, g3);
-        NodeData_ n3 = new NodeData_(3,1, g4);
-        NodeData_ n4 = new NodeData_(4,1,g5);
+        NodeData_ n0 = new NodeData_(0,0,new GeoLocation_(0,1,0));
+        NodeData_ n1 = new NodeData_(1,1,new GeoLocation_(2,3,0));
+        NodeData_ n2 = new NodeData_(2,1, new GeoLocation_(4,5,0));
+        NodeData_ n3 = new NodeData_(3,1,  new GeoLocation_(6,1,0));
+        NodeData_ n4 = new NodeData_(4,1,new GeoLocation_(3,4,0));
         g_algo.getGraph().addNode(n0);
         g_algo.getGraph().addNode(n1);
         g_algo.getGraph().addNode(n2);
@@ -100,33 +95,29 @@ class DWGraph_AlgoTest {
     void shortestPath() {
         g.connect(0,1,3);
         g.connect(1,4,5);
-        g.connect(4,3,2);
         g.connect(1,2,2);
+        g.connect(4,3,2);
+
         DirectedWeightedGraphAlgorithms graph_2 = new DWGraph_Algo();
         graph_2.init(g);
         List<NodeData> temp = graph_2.shortestPath(0, 3);
-        String act = "";
+        String ans = "";
 
         for (int i = 0; i < temp.size(); i++) {
-            act += ""+temp.get(i).getKey();
+            ans += ""+temp.get(i).getKey();
         }
-        assertEquals("0123", act);
+        assertEquals(ans, "0123");
     }
 
     @Test
     void center() {
         DWGraph graph = new DWGraph();
         DirectedWeightedGraphAlgorithms graph_algo = new DWGraph_Algo(graph);
-        GeoLocation_ g1= new GeoLocation_(0,1,0);
-        GeoLocation_ g2 = new GeoLocation_(2,3,0);
-        GeoLocation_ g3 = new GeoLocation_(4,5,0);
-        GeoLocation_ g4 = new GeoLocation_(6,1,0);
-        GeoLocation_ g5 = new GeoLocation_(3,4,0);
-        NodeData_ n0 = new NodeData_(0,0,g1);
-        NodeData_ n1 = new NodeData_(1,1,g2);
-        NodeData_ n2 = new NodeData_(2,1, g3);
-        NodeData_ n3 = new NodeData_(3,1, g4);
-        NodeData_ n4 = new NodeData_(4,1,g5);
+        NodeData_ n0 = new NodeData_(0,0,new GeoLocation_(0,1,0));
+        NodeData_ n1 = new NodeData_(1,1,new GeoLocation_(2,3,0));
+        NodeData_ n2 = new NodeData_(2,1, new GeoLocation_(4,5,0));
+        NodeData_ n3 = new NodeData_(3,1, new GeoLocation_(6,1,0));
+        NodeData_ n4 = new NodeData_(4,1,new GeoLocation_(3,4,0));
         graph_algo.getGraph().addNode(n0);
         graph_algo.getGraph().addNode(n1);
         graph_algo.getGraph().addNode(n2);
@@ -183,7 +174,7 @@ class DWGraph_AlgoTest {
 
             new_ga.load("data/G1_test.json");
             assertNotEquals(g1,new_ga.getGraph());
-            
+
     }
 
 }
